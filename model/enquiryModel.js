@@ -30,7 +30,7 @@ const enquiryModel = new mongoose.Schema({
         type:String,
         required:true
     },
-    Mothername:{
+    MotherName:{
         type:String
     },
     Address:{
@@ -39,10 +39,10 @@ const enquiryModel = new mongoose.Schema({
     Message:{
         type:String
     },
-    Reffer:{
+    Refer:{
         type:String
     },
-    Requirment:{
+    Requirement:{
         type:String
     },
     Status:{

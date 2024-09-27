@@ -41,10 +41,6 @@ const studentModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    Photo: {
-        type: String,
-        required: true
-    },
     Address: {
         type: String,
         required: true
@@ -213,6 +209,10 @@ const studentModel = new mongoose.Schema({
         },
     },
     Document:{
+        Photo: {
+            type: String,
+            required: true
+        },
         Birth:{
             type: String,
             required: true

@@ -1,8 +1,7 @@
 const Enquiry = require('../model/enquiryModel');
 
 exports.addEnquiry = async (req, res) => {
-    const { RegistrationNo, StudentName, DOB, Gender, MobileNo, AdmissionClass, FatherName, Mothername, Address, Message, Reffer, Requirment, Status } = req.body;
-
+    const { RegistrationNo, StudentName, DOB, Gender, MobileNo, AdmissionClass, FatherName, MotherName, Address, Message, Refer, Requirement, Status } = req.body;
     try {
         const enquiry = new Enquiry({
             RegistrationNo,
@@ -12,11 +11,11 @@ exports.addEnquiry = async (req, res) => {
             MobileNo,
             AdmissionClass,
             FatherName,
-            Mothername,
+            MotherName,
             Address,
             Message,
-            Reffer,
-            Requirment,
+            Refer,
+            Requirement,
             Status
         });
 
@@ -74,12 +73,12 @@ exports.deleteEnquiry = async (req,res) =>{
 
 exports.updateEnquiry = async (req,res) =>{
     const { id } = req.params;
-    const { StudentName, DOB, Gender, MobileNo, AdmissionClass, FatherName, Mothername, Address, Message, Reffer, Requirment, Status } = req.body;
+    const { StudentName, DOB, Gender, MobileNo, AdmissionClass, FatherName, MotherName, Address, Message, Refer, Requirement, Status } = req.body;
 
     try {
         const enquiry = await Enquiry.findOneAndUpdate(
             { RegistrationNo: id },
-            { StudentName, DOB, Gender, MobileNo, AdmissionClass, FatherName, Mothername, Address, Message, Reffer, Requirment, Status },
+            { StudentName, DOB, Gender, MobileNo, AdmissionClass, FatherName, MotherName, Address, Message, Refer, Requirement, Status },
             { new: true, runValidators: true }
         );
     
