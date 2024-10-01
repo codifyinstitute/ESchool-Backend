@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
 const studentModel = new mongoose.Schema({
-    StudentId:{
-        type:String,
-        required:true,
-        unique:true
-    },
-    Studentname: {
+    StudentName: {
         type: String,
         required: true
+    },
+    StudentId:{
+        type: String,
+        required: true,
+        unique:true
     },
     DOB: {
         type: String,
@@ -90,7 +90,7 @@ const studentModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    SourseOfAdmission: {
+    SourceOfAdmission: {
         type: String,
         required: true
     },
@@ -216,15 +216,12 @@ const studentModel = new mongoose.Schema({
     Document:{
         Photo: {
             type: String,
-            required: true
         },
         Birth:{
             type: String,
-            required: true
         },
         Leaving: {
             type: String,
-            required: true
         }
     }   
 });
