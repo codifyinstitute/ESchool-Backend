@@ -1,8 +1,9 @@
 const fs = require('fs');
-const moment = require('moment-timezone');
 const path = require('path');
+const moment = require('moment-timezone');
 const Student = require('../model/studentModel');
 const Counter = require('../model/counterModel');
+const Login = require('../model/loginModel'); // Ensure this model is defined
 
 // Add a new student
 const addStudent = async (req, res) => {
@@ -20,34 +21,73 @@ const addStudent = async (req, res) => {
         }
 
         id = `STU${year}${month}${counter.Count.toString().padStart(4, '0')}`;
-        const {
-            StudentName, StudentId, DOB, Gender, Religion, BloodGroup,
-            Category, Height, Weight, AadharNumber, MobileNo, Address,
-            City, Area, Pincode, AdmissionDete, Stream, AdmissionInClass,
-            FeeCategory, RollNo, LastSchoolAttended, IdentificationMark,
-            SourceOfAdmission, TransportNeeded, Route, FeeDiscount,
-            BankName, BankAccountNumber, IFSC, Disability, Discount,
-            Orphan, Subject, FatherDetail, MotherDetails, EmergencyContact
-        } = req.body;
 
         const newStudent = new Student({
-            StudentName, StudentId, DOB, Gender, Religion, BloodGroup,
-            Category, Height, Weight, AadharNumber, MobileNo, Address,
-            City, Area, Pincode, AdmissionDete, Stream, AdmissionInClass,
-            FeeCategory, RollNo, LastSchoolAttended, IdentificationMark,
-            SourceOfAdmission, TransportNeeded, Route, FeeDiscount,
-            BankName, BankAccountNumber, IFSC, Disability, Discount,
-            Orphan, Subject, FatherDetail, MotherDetails, EmergencyContact
+            StudentName: req.body.StudentName,
+            StudentId: id,
+            DOB: req.body.DOB,
+            Gender: req.body.Gender,
+            Religion: req.body.Religion,
+            BloodGroup: req.body.BloodGroup,
+            Category: req.body.Category,
+            Height: req.body.Height,
+            Weight: req.body.Weight,
+            AadharNumber: req.body.AadharNumber,
+            MobileNo: req.body.MobileNo,
+            Email: req.body.Email,
+            Address: req.body.Address,
+            City: req.body.City,
+            Area: req.body.Area,
+            Pincode: req.body.Pincode,
+            AdmissionDate: req.body.AdmissionDate,
+            Stream: req.body.Stream,
+            AdmissionInClass: req.body.AdmissionInClass,
+            House: req.body.House,
+            FeeCategory: req.body.FeeCategory,
+            RollNo: req.body.RollNo,
+            LastSchoolAttended: req.body.LastSchoolAttended,
+            IdentificationMark: req.body.IdentificationMark,
+            SourceOfAdmission: req.body.SourceOfAdmission,
+            TransportNeeded: req.body.TransportNeeded !== undefined ? req.body.TransportNeeded : false,
+            Route: req.body.Route,
+            FeeDiscount: req.body.FeeDiscount,
+            BankName: req.body.BankName,
+            BankAccountNumber: req.body.BankAccountNumber,
+            IFSC: req.body.IFSC,
+            Disability: req.body.Disability || false,
+            DisabilityName: req.body.DisabilityName,
+            Discount: req.body.Discount,
+            Orphan: req.body.Orphan,
+            Subject: req.body.Subject,
+            FatherDetail: {
+                Name: req.body.FatherDetail.Name,
+                Qualification: req.body.FatherDetail.Qualification,
+                Occupation: req.body.FatherDetail.Occupation,
+                AnnualIncome: req.body.FatherDetail.AnnualIncome,
+                AadharNumber: req.body.FatherDetail.AadharNumber,
+                MobileNo: req.body.FatherDetail.MobileNo,
+                EmailId: req.body.FatherDetail.EmailId,
+            },
+            MotherDetails: {
+                Name: req.body.MotherDetails.Name,
+                Qualification: req.body.MotherDetails.Qualification,
+                Occupation: req.body.MotherDetails.Occupation,
+                AnnualIncome: req.body.MotherDetails.AnnualIncome,
+                AadharNumber: req.body.MotherDetails.AadharNumber,
+                MobileNo: req.body.MotherDetails.MobileNo,
+                EmailId: req.body.MotherDetails.EmailId,
+            },
+            EmergencyContact: req.body.EmergencyContact,
+            Document: {
+                StudentPhoto: req.files?.photo ? req.files.photo[0].filename : null,
+                Birth: req.files?.birth ? req.files.birth[0].filename : null,
+                Leaving: req.files?.leaving ? req.files.leaving[0].filename : null,
+                FatherPhoto: req.files?.fatherPhoto ? req.files.fatherPhoto[0].filename : null,
+                MotherPhoto: req.files?.motherPhoto ? req.files.motherPhoto[0].filename : null,
+            },
         });
 
-        // Handle file uploads
-        if (req.files) {
-            if (req.files.photo) newStudent.Document.Photo = req.files.photo[0].filename;
-            if (req.files.birth) newStudent.Document.Birth = req.files.birth[0].filename;
-            if (req.files.leaving) newStudent.Document.Leaving = req.files.leaving[0].filename;
-        }
-
-        const newUser = new Login({ Id: id, Password: MobileNo, Role: "Student" });
+        const newUser = new Login({ Id: id, Password: req.body.MobileNo, Role: "Student" });
         await newUser.save();
         await counter.save();
         await newStudent.save();
@@ -88,63 +128,36 @@ const updateStudent = async (req, res) => {
             return res.status(404).json({ message: 'Student not found' });
         }
 
-        // Destructure the request body
-        const {
-            StudentName, DOB, Gender, Religion, BloodGroup,
-            Category, Height, Weight, AadharNumber, MobileNo,
-            Address, City, Area, Pincode, AdmissionDete,
-            Stream, AdmissionInClass, FeeCategory, RollNo,
-            LastSchoolAttended, IdentificationMark, SourceOfAdmission,
-            TransportNeeded, Route, FeeDiscount, BankName,
-            BankAccountNumber, IFSC, Disability, Discount,
-            Orphan, Subject, FatherDetail, MotherDetails, EmergencyContact
-        } = req.body;
-
         // Update fields only if new data is provided
-        student.StudentName = StudentName || student.StudentName;
-        student.DOB = DOB || student.DOB;
-        student.Gender = Gender || student.Gender;
-        student.Religion = Religion || student.Religion;
-        student.BloodGroup = BloodGroup || student.BloodGroup;
-        student.Category = Category || student.Category;
-        student.Height = Height || student.Height;
-        student.Weight = Weight || student.Weight;
-        student.AadharNumber = AadharNumber || student.AadharNumber;
-        student.MobileNo = MobileNo || student.MobileNo;
-        student.Address = Address || student.Address;
-        student.City = City || student.City;
-        student.Area = Area || student.Area;
-        student.Pincode = Pincode || student.Pincode;
-        student.AdmissionDete = AdmissionDete || student.AdmissionDete;
-        student.Stream = Stream || student.Stream;
-        student.AdmissionInClass = AdmissionInClass || student.AdmissionInClass;
-        student.FeeCategory = FeeCategory || student.FeeCategory;
-        student.RollNo = RollNo || student.RollNo;
-        student.LastSchoolAttended = LastSchoolAttended || student.LastSchoolAttended;
-        student.IdentificationMark = IdentificationMark || student.IdentificationMark;
-        student.SourceOfAdmission = SourceOfAdmission || student.SourceOfAdmission;
-        student.TransportNeeded = TransportNeeded !== undefined ? TransportNeeded : student.TransportNeeded;
-        student.Route = Route || student.Route;
-        student.FeeDiscount = FeeDiscount || student.FeeDiscount;
-        student.BankName = BankName || student.BankName;
-        student.BankAccountNumber = BankAccountNumber || student.BankAccountNumber;
-        student.IFSC = IFSC || student.IFSC;
-        student.Disability = Disability || student.Disability;
-        student.Discount = Discount || student.Discount;
-        student.Orphan = Orphan || student.Orphan;
-        student.Subject = Subject.length ? Subject : student.Subject;
-        student.FatherDetail = FatherDetail || student.FatherDetail;
-        student.MotherDetails = MotherDetails || student.MotherDetails;
-        student.EmergencyContact = EmergencyContact || student.EmergencyContact;
+        Object.assign(student, req.body);
 
-        // Handle file uploads
+        // Update FatherDetail and MotherDetails
+        if (req.body.FatherDetail) {
+            student.FatherDetail = { ...student.FatherDetail, ...req.body.FatherDetail };
+        }
+        if (req.body.MotherDetails) {
+            student.MotherDetails = { ...student.MotherDetails, ...req.body.MotherDetails };
+        }
+
+        // Handle file uploads for Father and Mother
         if (req.files) {
-            if (req.files.photo) {
-                // Delete old photo file if exists
-                if (student.Document.Photo) {
-                    fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.Photo));
+            if (req.files.fatherPhoto) {
+                if (student.Document.FatherPhoto) {
+                    fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.FatherPhoto));
                 }
-                student.Document.Photo = req.files.photo[0].filename;
+                student.Document.FatherPhoto = req.files.fatherPhoto[0].filename;
+            }
+            if (req.files.motherPhoto) {
+                if (student.Document.MotherPhoto) {
+                    fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.MotherPhoto));
+                }
+                student.Document.MotherPhoto = req.files.motherPhoto[0].filename;
+            }
+            if (req.files.photo) {
+                if (student.Document.StudentPhoto) {
+                    fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.StudentPhoto));
+                }
+                student.Document.StudentPhoto = req.files.photo[0].filename;
             }
             if (req.files.birth) {
                 if (student.Document.Birth) {
@@ -176,14 +189,20 @@ const deleteStudent = async (req, res) => {
         }
 
         // Delete files associated with the student
-        if (student.Document.Photo) {
-            fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.Photo));
+        if (student.Document.StudentPhoto) {
+            fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.StudentPhoto));
         }
         if (student.Document.Birth) {
             fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.Birth));
         }
         if (student.Document.Leaving) {
             fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.Leaving));
+        }
+        if (student.Document.FatherPhoto) {
+            fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.FatherPhoto));
+        }
+        if (student.Document.MotherPhoto) {
+            fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.MotherPhoto));
         }
 
         res.status(204).send();

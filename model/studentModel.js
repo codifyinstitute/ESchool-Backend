@@ -46,6 +46,10 @@ const studentModel = new mongoose.Schema({
         type: String,
         required: true
     },
+    Email:{
+        type:String,
+        required:true
+    },
     Address: {
         type: String,
         required: true
@@ -62,7 +66,7 @@ const studentModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    AdmissionDete: {
+    AdmissionDate: {
         type: String,
         required: true
     },
@@ -71,6 +75,10 @@ const studentModel = new mongoose.Schema({
         required: true
     },
     AdmissionInClass: {
+        type: String,
+        required: true
+    },
+    House:{
         type: String,
         required: true
     },
@@ -119,6 +127,10 @@ const studentModel = new mongoose.Schema({
         required: true
     },
     Disability: {
+        type: Boolean,
+        required: true
+    },
+    DisabilityName: {
         type: String,
         required: true
     },
@@ -160,10 +172,6 @@ const studentModel = new mongoose.Schema({
             type: String,
             required: true
         },
-        Photo: {
-            type: String,
-            required: true
-        }
     },
     MotherDetails: {
         Name: {
@@ -193,10 +201,6 @@ const studentModel = new mongoose.Schema({
         EmailId: {
             type: String,
             required: true
-        },
-        Photo: {
-            type: String,
-            required: true
         }
     },
     EmergencyContact:{
@@ -214,7 +218,7 @@ const studentModel = new mongoose.Schema({
         },
     },
     Document:{
-        Photo: {
+        StudentPhoto: {
             type: String,
         },
         Birth:{
@@ -222,6 +226,14 @@ const studentModel = new mongoose.Schema({
         },
         Leaving: {
             type: String,
+        },
+        FatherPhoto: {
+            type: String,
+            required: true
+        },
+        MotherPhoto: {
+            type: String,
+            required: true
         }
     }   
 });
