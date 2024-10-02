@@ -29,8 +29,8 @@ const addStaff = async (req, res) => {
             ReferredName, ReferredContact, Transport, Route, Address,
             City, Area, Pincode, Religion, MaritalStatus, FamilyDetail,
             EmergencyContact, TeachingSubject, Assign, AadharNo,
-            PanNo, PFNo, AccountNumber, IFSCCode, HomeWorkPublish,
-            ClassTeacher, Status
+            PanNo, PFNo, BankName, AccountNumber, IFSCCode, HomeWorkPublish,
+            ClassTeacher, Class, Status
         } = req.body;
 
         const newStaff = new Staff({
@@ -40,8 +40,8 @@ const addStaff = async (req, res) => {
             ReferredName, ReferredContact, Transport, Route, Address,
             City, Area, Pincode, Religion, MaritalStatus, FamilyDetail,
             EmergencyContact, TeachingSubject, Assign, AadharNo,
-            PanNo, PFNo, AccountNumber, IFSCCode, HomeWorkPublish,
-            ClassTeacher, Status
+            PanNo, PFNo, BankName, AccountNumber, IFSCCode, HomeWorkPublish,
+            ClassTeacher, Class, Status
         });
 
         // Handle file uploads
@@ -102,8 +102,8 @@ const updateStaff = async (req, res) => {
             ReferredName, ReferredContact, Transport, Route, Address,
             City, Area, Pincode, Religion, MaritalStatus, FamilyDetail,
             EmergencyContact, TeachingSubject, Assign, AadharNo,
-            PanNo, PFNo, AccountNumber, IFSCCode, HomeWorkPublish,
-            ClassTeacher, Status
+            PanNo, PFNo, BankName, AccountNumber, IFSCCode, HomeWorkPublish,
+            ClassTeacher, Class, Status
         } = req.body;
 
         // Update fields only if new data is provided
@@ -139,10 +139,12 @@ const updateStaff = async (req, res) => {
         staff.AadharNo = AadharNo || staff.AadharNo;
         staff.PanNo = PanNo || staff.PanNo;
         staff.PFNo = PFNo || staff.PFNo;
+        staff.BankName = BankName || staff.BankName;
         staff.AccountNumber = AccountNumber || staff.AccountNumber;
         staff.IFSCCode = IFSCCode || staff.IFSCCode;
         staff.HomeWorkPublish = HomeWorkPublish !== undefined ? HomeWorkPublish : staff.HomeWorkPublish;
         staff.ClassTeacher = ClassTeacher !== undefined ? ClassTeacher : staff.ClassTeacher;
+        staff.Class = Class.length ? Class : staff.Class;
         staff.Status = Status || staff.Status;
 
         // Handle file uploads

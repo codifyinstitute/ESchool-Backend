@@ -21,7 +21,7 @@ const addStudent = async (req, res) => {
         }
 
         id = `STU${year}${month}${counter.Count.toString().padStart(4, '0')}`;
-        
+
         const newStudent = new Student({
             StudentName: req.body.StudentName,
             StudentId: id,

@@ -120,10 +120,6 @@ const staffModel = new mongoose.Schema({
             type: String,
             required: true
         },
-        Relation: {
-            type: String,
-            required: true
-        },
         MobileNo: {
             type: String,
             required: true
@@ -160,6 +156,9 @@ const staffModel = new mongoose.Schema({
     PFNo:{
         type: String
     },
+    BankName: {
+        type: String
+    },
     AccountNumber: {
         type: String
     },
@@ -172,6 +171,7 @@ const staffModel = new mongoose.Schema({
     ClassTeacher: {
         type: Boolean
     },
+    Class:[String],
     Status: {
         type: String,
         required: true
