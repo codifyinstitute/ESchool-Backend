@@ -139,7 +139,7 @@ const studentModel = new mongoose.Schema({
         required: true
     },
     Orphan: {
-        type: String,
+        type: Boolean,
         required: true
     },
     Subject: [String],
