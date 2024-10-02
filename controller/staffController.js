@@ -3,6 +3,7 @@ const path = require('path');
 const moment = require('moment-timezone');
 const Staff = require('../model/staffModel');
 const Counter = require('../model/counterModel');
+const Login = require("../model/loginModel")
 
 // Add a new staff member
 const addStaff = async (req, res) => {
@@ -22,7 +23,7 @@ const addStaff = async (req, res) => {
         id = `EMP${year}${month}${counter.Count.toString().padStart(4, '0')}`;
         
         const {
-            Username, Role, Department, Name, DOB, DOJ,
+            Role, Department, Name, DOB, DOJ,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
             BloodGroup, Email, JobGrade, Experience, LastSchool,
             ReferredName, ReferredContact, Transport, Route, Address,
@@ -33,7 +34,7 @@ const addStaff = async (req, res) => {
         } = req.body;
         
         const newStaff = new Staff({
-            Username, EmployeeId:id, Role, Department, Name, DOB, DOJ,
+            EmployeeId:id, Role, Department, Name, DOB, DOJ,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
             BloodGroup, Email, JobGrade, Experience, LastSchool,
             ReferredName, ReferredContact, Transport, Route, Address,
@@ -42,6 +43,17 @@ const addStaff = async (req, res) => {
             PanNo, PFNo, AccountNumber, IFSCCode, HomeWorkPublish,
             ClassTeacher, Status
         });
+
+        console.log({
+            EmployeeId:id, Role, Department, Name, DOB, DOJ,
+            Category, LanguageKnown, Nationality, MobileNo, Salary,
+            BloodGroup, Email, JobGrade, Experience, LastSchool,
+            ReferredName, ReferredContact, Transport, Route, Address,
+            City, Area, Pincode, Religion, MaritalStatus, FamilyDetail,
+            EmergencyContact, TeachingSubject, Assign, AadharNo,
+            PanNo, PFNo, AccountNumber, IFSCCode, HomeWorkPublish,
+            ClassTeacher, Status
+        })
         
         // Handle file uploads
         if (req.files) {
@@ -51,8 +63,10 @@ const addStaff = async (req, res) => {
             if (req.files.experienceLetter)
                 newStaff.Documents.ExperienceLetter = req.files.experienceLetter[0].filename;
         }
+
+        console.log({ Id: id, Password: MobileNo, Role: Role })
         
-        const newUser = new Login({ Id: id, Password: MobileNo, Role: Role });
+        const newUser = new Login({ Id: id, Password: newStaff.MobileNo, Role: newStaff.Role });
         await newUser.save();
         await counter.save();
         await newStaff.save();
@@ -95,7 +109,7 @@ const updateStaff = async (req, res) => {
 
         // Destructure the request body
         const {
-            Username, Role, Department, Name, DOB, DOJ,
+            Role, Department, Name, DOB, DOJ,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
             BloodGroup, Email, JobGrade, Experience, LastSchool,
             ReferredName, ReferredContact, Transport, Route, Address,
@@ -106,7 +120,6 @@ const updateStaff = async (req, res) => {
         } = req.body;
 
         // Update fields only if new data is provided
-        staff.Username = Username || staff.Username;
         staff.Role = Role || staff.Role;
         staff.Department = Department || staff.Department;
         staff.Name = Name || staff.Name;
