@@ -19,9 +19,9 @@ const addStaff = async (req, res) => {
             counter.Count += 1;
         }
 
-        
+
         id = `EMP${year}${month}${counter.Count.toString().padStart(4, '0')}`;
-        
+
         const {
             Role, Department, Name, DOB, DOJ,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
@@ -32,9 +32,9 @@ const addStaff = async (req, res) => {
             PanNo, PFNo, AccountNumber, IFSCCode, HomeWorkPublish,
             ClassTeacher, Status
         } = req.body;
-        
+
         const newStaff = new Staff({
-            EmployeeId:id, Role, Department, Name, DOB, DOJ,
+            EmployeeId: id, Role, Department, Name, DOB, DOJ,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
             BloodGroup, Email, JobGrade, Experience, LastSchool,
             ReferredName, ReferredContact, Transport, Route, Address,
@@ -44,17 +44,6 @@ const addStaff = async (req, res) => {
             ClassTeacher, Status
         });
 
-        console.log({
-            EmployeeId:id, Role, Department, Name, DOB, DOJ,
-            Category, LanguageKnown, Nationality, MobileNo, Salary,
-            BloodGroup, Email, JobGrade, Experience, LastSchool,
-            ReferredName, ReferredContact, Transport, Route, Address,
-            City, Area, Pincode, Religion, MaritalStatus, FamilyDetail,
-            EmergencyContact, TeachingSubject, Assign, AadharNo,
-            PanNo, PFNo, AccountNumber, IFSCCode, HomeWorkPublish,
-            ClassTeacher, Status
-        })
-        
         // Handle file uploads
         if (req.files) {
             if (req.files.photo) newStaff.Documents.Photo = req.files.photo[0].filename;
@@ -64,8 +53,6 @@ const addStaff = async (req, res) => {
                 newStaff.Documents.ExperienceLetter = req.files.experienceLetter[0].filename;
         }
 
-        console.log({ Id: id, Password: MobileNo, Role: Role })
-        
         const newUser = new Login({ Id: id, Password: newStaff.MobileNo, Role: newStaff.Role });
         await newUser.save();
         await counter.save();
