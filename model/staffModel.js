@@ -180,12 +180,7 @@ const staffModel = new mongoose.Schema({
     Status: {
         type: String,
         required: true
-    },
-    Password: {
-        type: String,
-        required: true
-    },
-
+    }
 });
 
 const Staff = mongoose.model("Staff", staffModel);

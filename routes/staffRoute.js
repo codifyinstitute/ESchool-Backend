@@ -1,12 +1,12 @@
 const express = require('express');
-const upload = require('../config/multerConfig'); // Adjust the path as necessary
+const upload = require('../config/multerConfig');
 const {
     addStaff,
     updateStaff,
     getAllStaff,
     getStaffByEmployeeId,
     deleteStaff
-} = require('../controller/staffController'); // Adjust the path as necessary
+} = require('../controller/staffController');
 
 const router = express.Router();
 

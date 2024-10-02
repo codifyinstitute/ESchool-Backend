@@ -1,10 +1,25 @@
 const fs = require('fs');
+const moment = require('moment-timezone');
 const path = require('path');
-const Student = require('../model/studentModel'); // Adjust the path as necessary
+const Student = require('../model/studentModel');
+const Counter = require('../model/counterModel');
 
 // Add a new student
 const addStudent = async (req, res) => {
+    const month = moment().format('MM');
+    const year = moment().format('YYYY');
+    let id;
+
     try {
+        let counter = await Counter.findOne({ Title: `STU-${year}-${month}` });
+
+        if (!counter) {
+            counter = new Counter({ Title: `STU-${year}-${month}`, Count: 1 });
+        } else {
+            counter.Count += 1;
+        }
+
+        id = `STU${year}${month}${counter.Count.toString().padStart(4, '0')}`;
         const {
             StudentName, StudentId, DOB, Gender, Religion, BloodGroup,
             Category, Height, Weight, AadharNumber, MobileNo, Address,
@@ -32,6 +47,9 @@ const addStudent = async (req, res) => {
             if (req.files.leaving) newStudent.Document.Leaving = req.files.leaving[0].filename;
         }
 
+        const newUser = new Login({ Id: id, Password: MobileNo, Role: "Student" });
+        await newUser.save();
+        await counter.save();
         await newStudent.save();
         res.status(201).json(newStudent);
     } catch (error) {

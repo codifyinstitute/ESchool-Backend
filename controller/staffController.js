@@ -1,41 +1,60 @@
 const fs = require('fs');
 const path = require('path');
-const Staff = require('../model/staffModel'); // Adjust the path as necessary
+const moment = require('moment-timezone');
+const Staff = require('../model/staffModel');
+const Counter = require('../model/counterModel');
 
 // Add a new staff member
 const addStaff = async (req, res) => {
+    const month = moment().format('MM');
+    const year = moment().format('YYYY');
+    let id;
     try {
+        let counter = await Counter.findOne({ Title: `EMP-${year}-${month}` });
+
+        if (!counter) {
+            counter = new Counter({ Title: `EMP-${year}-${month}`, Count: 1 });
+        } else {
+            counter.Count += 1;
+        }
+
+        
+        id = `EMP${year}${month}${counter.Count.toString().padStart(4, '0')}`;
+        
         const {
-            Username, EmployeeId, Role, Department, Name, DOB, DOJ, 
+            Username, Role, Department, Name, DOB, DOJ,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
             BloodGroup, Email, JobGrade, Experience, LastSchool,
             ReferredName, ReferredContact, Transport, Route, Address,
             City, Area, Pincode, Religion, MaritalStatus, FamilyDetail,
-            EmergencyContact, TeachingSubject, Assign, AadharNo, 
+            EmergencyContact, TeachingSubject, Assign, AadharNo,
             PanNo, PFNo, AccountNumber, IFSCCode, HomeWorkPublish,
-            ClassTeacher, Status, Password
+            ClassTeacher, Status
         } = req.body;
-
+        
         const newStaff = new Staff({
-            Username, EmployeeId, Role, Department, Name, DOB, DOJ, 
+            Username, EmployeeId:id, Role, Department, Name, DOB, DOJ,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
             BloodGroup, Email, JobGrade, Experience, LastSchool,
             ReferredName, ReferredContact, Transport, Route, Address,
             City, Area, Pincode, Religion, MaritalStatus, FamilyDetail,
-            EmergencyContact, TeachingSubject, Assign, AadharNo, 
+            EmergencyContact, TeachingSubject, Assign, AadharNo,
             PanNo, PFNo, AccountNumber, IFSCCode, HomeWorkPublish,
-            ClassTeacher, Status, Password
+            ClassTeacher, Status
         });
-
+        
         // Handle file uploads
         if (req.files) {
             if (req.files.photo) newStaff.Documents.Photo = req.files.photo[0].filename;
-            if (req.files.qualificationCertificate) 
+            if (req.files.qualificationCertificate)
                 newStaff.Documents.QualificationCertificate = req.files.qualificationCertificate[0].filename;
-            if (req.files.experienceLetter) 
+            if (req.files.experienceLetter)
                 newStaff.Documents.ExperienceLetter = req.files.experienceLetter[0].filename;
         }
-
+        
+        const newUser = new Login({ Id: id, Password: MobileNo, Role: Role });
+        await newUser.save();
+        await counter.save();
         await newStaff.save();
         res.status(201).json(newStaff);
     } catch (error) {
@@ -76,14 +95,14 @@ const updateStaff = async (req, res) => {
 
         // Destructure the request body
         const {
-            Username, Role, Department, Name, DOB, DOJ, 
+            Username, Role, Department, Name, DOB, DOJ,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
             BloodGroup, Email, JobGrade, Experience, LastSchool,
             ReferredName, ReferredContact, Transport, Route, Address,
             City, Area, Pincode, Religion, MaritalStatus, FamilyDetail,
-            EmergencyContact, TeachingSubject, Assign, AadharNo, 
+            EmergencyContact, TeachingSubject, Assign, AadharNo,
             PanNo, PFNo, AccountNumber, IFSCCode, HomeWorkPublish,
-            ClassTeacher, Status, Password
+            ClassTeacher, Status
         } = req.body;
 
         // Update fields only if new data is provided
@@ -125,7 +144,6 @@ const updateStaff = async (req, res) => {
         staff.HomeWorkPublish = HomeWorkPublish !== undefined ? HomeWorkPublish : staff.HomeWorkPublish;
         staff.ClassTeacher = ClassTeacher !== undefined ? ClassTeacher : staff.ClassTeacher;
         staff.Status = Status || staff.Status;
-        staff.Password = Password || staff.Password;
 
         // Handle file uploads
         if (req.files) {
@@ -149,7 +167,6 @@ const updateStaff = async (req, res) => {
                 staff.Documents.ExperienceLetter = req.files.experienceLetter[0].filename;
             }
         }
-
         await staff.save();
         res.status(200).json(staff);
     } catch (error) {
