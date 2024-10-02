@@ -53,5 +53,5 @@ const enquiryModel = new mongoose.Schema({
     }
 });
 
-const Enquiry = ("Enquiry", enquiryModel);
+const Enquiry = mongoose.model("Enquiry", enquiryModel);
 module.exports = Enquiry;
