@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const staffLeavingModel = new mongoose.Schema({
+const staffLeavingModelFrontOffice = new mongoose.Schema({
     Name:{
         type:String,
         required:true
@@ -38,5 +38,5 @@ const staffLeavingModel = new mongoose.Schema({
     }
 
 });
-const StaffLeaving = mongoose.model("StaffLeaving", staffLeavingModel);
+const StaffLeaving = mongoose.model("StaffLeaving", staffLeavingModelFrontOffice);
 module.exports = StaffLeaving;

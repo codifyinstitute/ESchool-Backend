@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const studentLeavingModel = new mongoose.Schema({
+const studentLeavingModelFrontOffice = new mongoose.Schema({
     Name:{
         type:String,
         required:true
@@ -42,5 +42,5 @@ const studentLeavingModel = new mongoose.Schema({
     }
 
 });
-const StudentLeaving = mongoose.model("StudentLeaving", studentLeavingModel);
+const StudentLeaving = mongoose.model("StudentLeaving", studentLeavingModelFrontOffice);
 module.exports = StudentLeaving;
