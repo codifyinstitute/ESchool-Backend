@@ -59,33 +59,20 @@ const addStudent = async (req, res) => {
             Discount: req.body.Discount,
             Orphan: req.body.Orphan,
             Subject: req.body.Subject,
-            FatherDetail: {
-                Name: req.body.FatherDetail.Name,
-                Qualification: req.body.FatherDetail.Qualification,
-                Occupation: req.body.FatherDetail.Occupation,
-                AnnualIncome: req.body.FatherDetail.AnnualIncome,
-                AadharNumber: req.body.FatherDetail.AadharNumber,
-                MobileNo: req.body.FatherDetail.MobileNo,
-                EmailId: req.body.FatherDetail.EmailId,
-            },
-            MotherDetails: {
-                Name: req.body.MotherDetails.Name,
-                Qualification: req.body.MotherDetails.Qualification,
-                Occupation: req.body.MotherDetails.Occupation,
-                AnnualIncome: req.body.MotherDetails.AnnualIncome,
-                AadharNumber: req.body.MotherDetails.AadharNumber,
-                MobileNo: req.body.MotherDetails.MobileNo,
-                EmailId: req.body.MotherDetails.EmailId,
-            },
-            EmergencyContact: req.body.EmergencyContact,
+            FatherDetail: JSON.parse(req.body.FatherDetail),
+            MotherDetails: JSON.parse(req.body.MotherDetails),
+            EmergencyContact: JSON.parse(req.body.EmergencyContact),
             Document: {
-                StudentPhoto: req.files?.photo ? req.files.photo[0].filename : null,
-                Birth: req.files?.birth ? req.files.birth[0].filename : null,
-                Leaving: req.files?.leaving ? req.files.leaving[0].filename : null,
-                FatherPhoto: req.files?.fatherPhoto ? req.files.fatherPhoto[0].filename : null,
-                MotherPhoto: req.files?.motherPhoto ? req.files.motherPhoto[0].filename : null,
+                StudentPhoto: req.files?.StudentPhoto ? req.files.StudentPhoto[0].filename : null,
+                Birth: req.files?.Birth ? req.files.Birth[0].filename : null,
+                Leaving: req.files?.Leaving ? req.files.Leaving[0].filename : null,
+                FatherPhoto: req.files?.FatherPhoto ? req.files.FatherPhoto[0].filename : null,
+                MotherPhoto: req.files?.MotherPhoto ? req.files.MotherPhoto[0].filename : null,
             },
         });
+
+        console.log({ Id: id, Password: req.body.MobileNo, Role: "Student" })
+        console.log(req.body)
 
         const newUser = new Login({ Id: id, Password: req.body.MobileNo, Role: "Student" });
         await newUser.save();
@@ -94,6 +81,7 @@ const addStudent = async (req, res) => {
         res.status(201).json(newStudent);
     } catch (error) {
         res.status(400).json({ message: error.message });
+        console.log(error)
     }
 };
 
@@ -141,35 +129,35 @@ const updateStudent = async (req, res) => {
 
         // Handle file uploads for Father and Mother
         if (req.files) {
-            if (req.files.fatherPhoto) {
+            if (req.files.FatherPhoto) {
                 if (student.Document.FatherPhoto) {
                     fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.FatherPhoto));
                 }
-                student.Document.FatherPhoto = req.files.fatherPhoto[0].filename;
+                student.Document.FatherPhoto = req.files.FatherPhoto[0].filename;
             }
-            if (req.files.motherPhoto) {
+            if (req.files.MotherPhoto) {
                 if (student.Document.MotherPhoto) {
                     fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.MotherPhoto));
                 }
-                student.Document.MotherPhoto = req.files.motherPhoto[0].filename;
+                student.Document.MotherPhoto = req.files.MotherPhoto[0].filename;
             }
-            if (req.files.photo) {
+            if (req.files.StudentPhoto) {
                 if (student.Document.StudentPhoto) {
                     fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.StudentPhoto));
                 }
-                student.Document.StudentPhoto = req.files.photo[0].filename;
+                student.Document.StudentPhoto = req.files.StudentPhoto[0].filename;
             }
-            if (req.files.birth) {
+            if (req.files.Birth) {
                 if (student.Document.Birth) {
                     fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.Birth));
                 }
-                student.Document.Birth = req.files.birth[0].filename;
+                student.Document.Birth = req.files.Birth[0].filename;
             }
-            if (req.files.leaving) {
+            if (req.files.Leaving) {
                 if (student.Document.Leaving) {
                     fs.unlinkSync(path.join(__dirname, 'uploads', student.Document.Leaving));
                 }
-                student.Document.Leaving = req.files.leaving[0].filename;
+                student.Document.Leaving = req.files.Leaving[0].filename;
             }
         }
 

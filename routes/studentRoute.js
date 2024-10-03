@@ -12,20 +12,20 @@ const router = express.Router();
 
 // Add a new student with file uploads
 router.post('/add', upload.fields([
-    { name: 'photo' },       // Student photo
-    { name: 'birth' },       // Birth document
-    { name: 'leaving' },     // Leaving document
-    { name: 'fatherPhoto' }, // Father's photo
-    { name: 'motherPhoto' }  // Mother's photo
+    { name: 'StudentPhoto' },       // Student photo
+    { name: 'Birth' },       // Birth document
+    { name: 'Leaving' },     // Leaving document
+    { name: 'FatherPhoto' }, // Father's photo
+    { name: 'MotherPhoto' }  // Mother's photo
 ]), addStudent);
 
 // Update an existing student with file uploads
 router.put('/update/:StudentId', upload.fields([
-    { name: 'photo' },       // Student photo
-    { name: 'birth' },       // Birth document
-    { name: 'leaving' },     // Leaving document
-    { name: 'fatherPhoto' }, // Father's photo
-    { name: 'motherPhoto' }  // Mother's photo
+    { name: 'StudentPhoto' },       // Student photo
+    { name: 'Birth' },       // Birth document
+    { name: 'Leaving' },     // Leaving document
+    { name: 'FatherPhoto' }, // Father's photo
+    { name: 'MotherPhoto' }  // Mother's photo
 ]), updateStudent);
 
 // Get all students
