@@ -23,7 +23,7 @@ const addStaff = async (req, res) => {
         id = `EMP${year}${month}${counter.Count.toString().padStart(4, '0')}`;
 
         const {
-            Role, Department, Name, DOB, DOJ,
+            Role, Department, Name, DOB, DOJ,Gender,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
             BloodGroup, Email, JobGrade, Experience, LastSchool,
             ReferredName, ReferredContact, Transport, Route, Address,
@@ -34,7 +34,7 @@ const addStaff = async (req, res) => {
         } = req.body;
 
         const newStaff = new Staff({
-            EmployeeId: id, Role, Department, Name, DOB, DOJ,
+            EmployeeId: id, Role, Department, Name, DOB, DOJ,Gender,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
             BloodGroup, Email, JobGrade, Experience, LastSchool,
             ReferredName, ReferredContact, Transport, Route, Address,
@@ -96,7 +96,7 @@ const updateStaff = async (req, res) => {
 
         // Destructure the request body
         const {
-            Role, Department, Name, DOB, DOJ,
+            Role, Department, Name, DOB, DOJ,Gender,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
             BloodGroup, Email, JobGrade, Experience, LastSchool,
             ReferredName, ReferredContact, Transport, Route, Address,
@@ -112,6 +112,7 @@ const updateStaff = async (req, res) => {
         staff.Name = Name || staff.Name;
         staff.DOB = DOB || staff.DOB;
         staff.DOJ = DOJ || staff.DOJ;
+        staff.Gender = Gender || staff.Gender;
         staff.Category = Category || staff.Category;
         staff.LanguageKnown = LanguageKnown.length ? LanguageKnown : staff.LanguageKnown;
         staff.Nationality = Nationality || staff.Nationality;
