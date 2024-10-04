@@ -26,6 +26,10 @@ const staffModel = new mongoose.Schema({
         type: String,
         required: true
     },
+    Gender: {
+        type: String,
+        required: true
+    },
     Category: {
         type: String
     },
