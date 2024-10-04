@@ -12,16 +12,16 @@ const router = express.Router();
 
 // Add a new staff member with file uploads
 router.post('/add', upload.fields([
-    { name: 'photo' }, 
-    { name: 'qualificationCertificate' }, 
-    { name: 'experienceLetter' }
+    { name: 'Photo' }, 
+    { name: 'QualificationCertificate' }, 
+    { name: 'ExperienceLetter' }
 ]), addStaff);
 
 // Update an existing staff member with file uploads
 router.put('/update/:EmployeeId', upload.fields([
-    { name: 'photo' }, 
-    { name: 'qualificationCertificate' }, 
-    { name: 'experienceLetter' }
+    { name: 'Photo' }, 
+    { name: 'QualificationCertificate' }, 
+    { name: 'ExperienceLetter' }
 ]), updateStaff);
 
 // Get all staff members

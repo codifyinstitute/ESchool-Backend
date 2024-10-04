@@ -46,11 +46,11 @@ const addStaff = async (req, res) => {
 
         // Handle file uploads
         if (req.files) {
-            if (req.files.photo) newStaff.Documents.Photo = req.files.photo[0].filename;
-            if (req.files.qualificationCertificate)
-                newStaff.Documents.QualificationCertificate = req.files.qualificationCertificate[0].filename;
-            if (req.files.experienceLetter)
-                newStaff.Documents.ExperienceLetter = req.files.experienceLetter[0].filename;
+            if (req.files.Photo) newStaff.Documents.Photo = req.files.Photo[0].filename;
+            if (req.files.QualificationCertificate)
+                newStaff.Documents.QualificationCertificate = req.files.QualificationCertificate[0].filename;
+            if (req.files.ExperienceLetter)
+                newStaff.Documents.ExperienceLetter = req.files.ExperienceLetter[0].filename;
         }
 
         const newUser = new Login({ Id: id, Password: newStaff.MobileNo, Role: newStaff.Role });
@@ -154,19 +154,19 @@ const updateStaff = async (req, res) => {
                 if (staff.Documents.Photo) {
                     fs.unlinkSync(path.join(__dirname, 'uploads', staff.Documents.Photo));
                 }
-                staff.Documents.Photo = req.files.photo[0].filename;
+                staff.Documents.Photo = req.files.Photo[0].filename;
             }
-            if (req.files.qualificationCertificate) {
+            if (req.files.QualificationCertificate) {
                 if (staff.Documents.QualificationCertificate) {
                     fs.unlinkSync(path.join(__dirname, 'uploads', staff.Documents.QualificationCertificate));
                 }
-                staff.Documents.QualificationCertificate = req.files.qualificationCertificate[0].filename;
+                staff.Documents.QualificationCertificate = req.files.QualificationCertificate[0].filename;
             }
-            if (req.files.experienceLetter) {
+            if (req.files.ExperienceLetter) {
                 if (staff.Documents.ExperienceLetter) {
                     fs.unlinkSync(path.join(__dirname, 'uploads', staff.Documents.ExperienceLetter));
                 }
-                staff.Documents.ExperienceLetter = req.files.experienceLetter[0].filename;
+                staff.Documents.ExperienceLetter = req.files.ExperienceLetter[0].filename;
             }
         }
         await staff.save();
