@@ -11,17 +11,7 @@ const addStaff = async (req, res) => {
     const year = moment().format('YYYY');
     let id;
     try {
-        let counter = await Counter.findOne({ Title: `EMP-${year}-${month}` });
-
-        if (!counter) {
-            counter = new Counter({ Title: `EMP-${year}-${month}`, Count: 1 });
-        } else {
-            counter.Count += 1;
-        }
-
-
-        id = `EMP${year}${month}${counter.Count.toString().padStart(4, '0')}`;
-
+        
         const {
             Role, Department, Name, DOB, DOJ,Gender,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
@@ -33,6 +23,17 @@ const addStaff = async (req, res) => {
             ClassTeacher, Class, Status
         } = req.body;
 
+        let counter = await Counter.findOne({ Title: `${Role.slice(0, 3).toUpperCase()}-${year}-${month}` });
+
+        if (!counter) {
+            counter = new Counter({ Title: `${Role.slice(0, 3).toUpperCase()}-${year}-${month}`, Count: 1 });
+        } else {
+            counter.Count += 1;
+        }
+
+
+        id = `${Role.slice(0, 3).toUpperCase()}${year}${month}${counter.Count.toString().padStart(4, '0')}`;
+        
         const newStaff = new Staff({
             EmployeeId: id, Role, Department, Name, DOB, DOJ,Gender,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
