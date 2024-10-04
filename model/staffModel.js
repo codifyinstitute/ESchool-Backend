@@ -36,7 +36,6 @@ const staffModel = new mongoose.Schema({
     LanguageKnown: [String],
     Nationality: {
         type: String,
-        required: true
     },
     MobileNo: {
         type: String,
@@ -178,7 +177,8 @@ const staffModel = new mongoose.Schema({
     Class:[String],
     Status: {
         type: String,
-        required: true
+        required: true,
+        default:"Active"
     }
 });
 

@@ -11,9 +11,9 @@ const addStaff = async (req, res) => {
     const year = moment().format('YYYY');
     let id;
     try {
-        
+        console.log(req.body)
         const {
-            Role, Department, Name, DOB, DOJ,Gender,
+            Role, Department, Name, DOB, DOJ, Gender,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
             BloodGroup, Email, JobGrade, Experience, LastSchool,
             ReferredName, ReferredContact, Transport, Route, Address,
@@ -33,16 +33,16 @@ const addStaff = async (req, res) => {
 
 
         id = `${Role.slice(0, 3).toUpperCase()}${year}${month}${counter.Count.toString().padStart(4, '0')}`;
-        
+
         const newStaff = new Staff({
-            EmployeeId: id, Role, Department, Name, DOB, DOJ,Gender,
+            EmployeeId: id, Role, Department, Name, DOB, DOJ, Gender,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
             BloodGroup, Email, JobGrade, Experience, LastSchool,
             ReferredName, ReferredContact, Transport, Route, Address,
-            City, Area, Pincode, Religion, MaritalStatus, FamilyDetail,
-            EmergencyContact, TeachingSubject, Assign, AadharNo,
+            City, Area, Pincode, Religion, MaritalStatus, FamilyDetail: JSON.parse(FamilyDetail),
+            EmergencyContact: JSON.parse(EmergencyContact), TeachingSubject, Assign: JSON.parse(Assign), AadharNo,
             PanNo, PFNo, BankName, AccountNumber, IFSCCode, HomeWorkPublish,
-            ClassTeacher, Class, Status
+            ClassTeacher, Class, Status: Status || "Active"
         });
 
         // Handle file uploads
@@ -61,6 +61,7 @@ const addStaff = async (req, res) => {
         res.status(201).json(newStaff);
     } catch (error) {
         res.status(400).json({ message: error.message });
+        console.log(error);
     }
 };
 
@@ -97,7 +98,7 @@ const updateStaff = async (req, res) => {
 
         // Destructure the request body
         const {
-            Role, Department, Name, DOB, DOJ,Gender,
+            Role, Department, Name, DOB, DOJ, Gender,
             Category, LanguageKnown, Nationality, MobileNo, Salary,
             BloodGroup, Email, JobGrade, Experience, LastSchool,
             ReferredName, ReferredContact, Transport, Route, Address,
