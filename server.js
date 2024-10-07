@@ -11,6 +11,8 @@ const postalRoutesFO = require('./routes/postalRoutesFO');
 const staffLeavingRoutesFO = require('./routes/staffLeavingRoutesFO');
 const studentLeavingRoutesFO = require('./routes/studentLeavingRoutesFO');
 const visitorRoutesFO = require('./routes/visitorRoutesFO');
+const classRoute = require('./routes/Admin/classRoute');
+const academicYearRoute = require('./routes/Academic/academicYearRoute')
 
 app.use(cors());
 
@@ -30,6 +32,8 @@ app.use('/postal', postalRoutesFO);
 app.use('/staff-leaving', staffLeavingRoutesFO);
 app.use('/student-leaving', studentLeavingRoutesFO);
 app.use('/visitor', visitorRoutesFO);
+app.use('/admin/class', classRoute);
+app.use('/academic-year', academicYearRoute);
 
 app.get('/', (req, res) => res.send('<h1 style="display:flex;height: 100%;align-items: center;justify-content: center;margin:0;">Server Is Running!!!!</h1>'));
 

@@ -1,4 +1,5 @@
 const StaffLeaving = require('../model/staffLeavingModelFrontOffice');
+const moment = require('moment-timezone');
 
 // Create a new staff leaving record
 const addLeavingRecord = async (req, res) => {
@@ -12,8 +13,8 @@ const addLeavingRecord = async (req, res) => {
     try {
         const leavingRecord = new StaffLeaving({
             Name,
-            Date,
-            Time,
+            Date:moment().tz("Asia/Kolkata").format('DD-MM-YYYY'),
+            Time:moment().tz("Asia/Kolkata").format('HH:MM:SS'),
             Department,
             Purpose,
             WillBack,

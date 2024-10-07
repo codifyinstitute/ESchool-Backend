@@ -1,3 +1,4 @@
+const moment = require('moment-timezone');
 const StudentLeaving = require('../model/studentLeavingModelFrontOffice');
 
 // Create a new student leaving record
@@ -12,8 +13,8 @@ const addLeavingRecord = async (req, res) => {
     try {
         const leavingRecord = new StudentLeaving({
             Name,
-            Date,
-            Time,
+            Date:moment().tz("Asia/Kolkata").format('DD-MM-YYYY'),
+            Time:moment().tz("Asia/Kolkata").format('HH:MM:SS'),
             Class,
             Section,
             Purpose,

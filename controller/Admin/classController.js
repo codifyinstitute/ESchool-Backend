@@ -1,18 +1,24 @@
 const moment = require('moment-timezone');
 const ClassModel = require('../../model/Admin/classModel');
+const Academic = require('../../model/Academic/academicYearModel')
 const Counter = require('../model/counterModel');
 
 // Add a new class
 const addClass = async (req, res) => {
     var id;
     const year = moment().format('YYYY');
+    const month = moment().format('MM');
     try {
+        const academicYear = await Academic.findOne({ Status: true });
 
-        let counter = await Counter.findOne({ Title: `CLS-${year}` });
+        if (!academicYear) {
+            return res.status(400).json({ message: "Please Select Academic Year First" });
+        }
+
+        let counter = await Counter.findOne({ Title: `CLS-${year}${month}` });
 
         if (!counter) {
-            counter = new Counter({ Title: `CLS-${year}
-                `, Count: 1 });
+            counter = new Counter({ Title: `CLS-${year}${month}`, Count: 1 });
         } else {
             counter.Count += 1;
         }
@@ -21,7 +27,7 @@ const addClass = async (req, res) => {
         id = `CLS${year}${month}${counter.Count.toString().padStart(4, '0')}`;
 
         const { Class, Section, MaxCount } = req.body;
-        const newClass = new ClassModel({ ClassId, Class, Section, MaxCount });
+        const newClass = new ClassModel({ ClassId, AcademicYear: academicYear.Year, Class, Section, MaxCount });
         await newClass.save();
         res.status(201).json(newClass);
     } catch (error) {
@@ -86,37 +92,7 @@ const deleteClass = async (req, res) => {
 module.exports = {
     addClass,
     getAllClasses,
-    getClassById,
+    getClassById,   
     updateClass,
     deleteClass
 };
-
-
-
-///////
-// const express = require('express');
-// const router = express.Router();
-// const {
-//     addClass,
-//     getAllClasses,
-//     getClassById,
-//     updateClass,
-//     deleteClass
-// } = require('./classController');
-
-// // Route to add a new class
-// router.post('/', addClass);
-
-// // Route to get all classes
-// router.get('/', getAllClasses);
-
-// // Route to get a class by ClassId
-// router.get('/:classId', getClassById);
-
-// // Route to update a class by ClassId
-// router.put('/:classId', updateClass);
-
-// // Route to delete a class by ClassId
-// router.delete('/:classId', deleteClass);
-
-// module.exports = router;

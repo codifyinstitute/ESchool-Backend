@@ -6,6 +6,10 @@ const classModel = new mongoose.Schema({
         required: true,
         unique:true
     },
+    AcademicYear:{
+        type:String,
+        required:true
+    },
     Class:{
         type:String,
         required:true
