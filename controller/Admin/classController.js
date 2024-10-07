@@ -1,7 +1,7 @@
 const moment = require('moment-timezone');
 const ClassModel = require('../../model/Admin/classModel');
 const Academic = require('../../model/Academic/academicYearModel')
-const Counter = require('../model/counterModel');
+const Counter = require('../../model/counterModel');
 
 // Add a new class
 const addClass = async (req, res) => {
