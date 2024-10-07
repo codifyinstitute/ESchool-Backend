@@ -1,19 +1,21 @@
+const moment = require('moment-timezone');
 const VisitorFrontOffice = require('../model/visitorFrontOfficeModel');
 
 // Create a new visitor record
 const addVisitorRecord = async (req, res) => {
-    const { Category, Date, Time, Name, TotalVisitorNo, Purpose, MobileNo, OTP, verifiedVisitorId } = req.body;
+    const { Category, Name, TotalVisitorNo, Purpose, MobileNo, OTP, verifiedVisitorId } = req.body;
 
     // Basic validation
-    if (!Category || !Date || !Time || !Name || !Purpose || !MobileNo) {
+    if (!Category || !Name || !Purpose || !MobileNo) {
         return res.status(400).json({ message: 'Category, Date, Time, Name, Purpose, and MobileNo are required' });
     }
 
     try {
         const visitorRecord = new VisitorFrontOffice({
             Category,
-            Date,
-            Time,
+            Date:moment().tz("Asia/Kolkata").format('DD-MM-YYYY'),
+            InTime:moment().tz("Asia/Kolkata").format('HH:MM:SS'),
+            OutTime:'-',
             Name,
             TotalVisitorNo,
             Purpose,
@@ -25,6 +27,7 @@ const addVisitorRecord = async (req, res) => {
         res.status(201).json(visitorRecord);
     } catch (error) {
         res.status(500).json({ message: error.message });
+        console.log(error)
     }
 };
 
@@ -75,10 +78,34 @@ const deleteVisitorRecord = async (req, res) => {
     }
 };
 
+// Update OutTime by ID
+const updateOutTime = async (req, res) => {
+    const { id } = req.params; // Get ID from request parameters
+    const { OutTime } = req.body; // Get OutTime from request body
+
+    try {
+        const visitor = await VisitorFrontOffice.findByIdAndUpdate(
+            id,
+            { OutTime:moment().tz("Asia/Kolkata").format('HH:MM:SS') },
+            { new: true, runValidators: true } // Return the updated document and validate
+        );
+
+        if (!visitor) {
+            return res.status(404).json({ message: "Visitor not found" });
+        }
+
+        res.status(200).json({ message: "OutTime updated successfully", visitor });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error updating OutTime", error });
+    }
+};
+
 module.exports = {
     addVisitorRecord,
     getAllVisitorRecords,
     getVisitorRecordById,
     updateVisitorRecord,
-    deleteVisitorRecord
+    deleteVisitorRecord,
+    updateOutTime
 };

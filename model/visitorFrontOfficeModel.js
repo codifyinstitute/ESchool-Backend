@@ -9,7 +9,11 @@ const visitorFrontOfficeModel = new mongoose.Schema({
         type:String,
         required:true
     },
-    Time:{
+    InTime:{
+        type:String,
+        required:true
+    },
+    OutTime:{
         type:String,
         required:true
     },

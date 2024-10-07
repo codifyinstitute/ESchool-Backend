@@ -5,7 +5,8 @@ const {
     getAllVisitorRecords,
     getVisitorRecordById,
     updateVisitorRecord,
-    deleteVisitorRecord
+    deleteVisitorRecord,
+    updateOutTime
 } = require('../controller/visitorControllerFO');
 
 // Route to add a new visitor record
@@ -22,6 +23,9 @@ router.put('/update/:id', updateVisitorRecord);
 
 // Route to delete a visitor record by ID
 router.delete('/delete/:id', deleteVisitorRecord);
+
+// Update OutTime route
+router.put('/visitor/:id/outtime', updateOutTime);
 
 module.exports = router;
     
