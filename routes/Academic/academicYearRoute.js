@@ -8,6 +8,9 @@ router.post('/add', academicYearController.addAcademicYear);
 // Get all academic years
 router.get('/all', academicYearController.getAllAcademicYears);
 
+// Change status to active
+router.put('/update/set-active', academicYearController.setActiveStatus);
+
 // Get academic year by Year
 router.get('/get/:year', academicYearController.getAcademicYearByYear);
 
@@ -17,7 +20,5 @@ router.put('/update/:year', academicYearController.updateAcademicYear);
 // Delete academic year
 router.delete('/delete/:year', academicYearController.deleteAcademicYear);
 
-// Change status to active
-router.put('/update/set-active', academicYearController.setActiveStatus);
 
 module.exports = router;

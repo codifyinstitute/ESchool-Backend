@@ -3,8 +3,8 @@ const AcademicYear = require('../../model/Academic/academicYearModel');
 // Add a new academic year
 exports.addAcademicYear = async (req, res) => {
     try {
-        const { Year, Status } = req.body;
-        const newAcademicYear = new AcademicYear({ Year, Status });
+        const { Year } = req.body;
+        const newAcademicYear = new AcademicYear({ Year, Status: false });
         await newAcademicYear.save();
         res.status(201).json({ message: "Academic Year added successfully", newAcademicYear });
     } catch (error) {
@@ -69,6 +69,7 @@ exports.deleteAcademicYear = async (req, res) => {
 exports.setActiveStatus = async (req, res) => {
     try {
         const { Year } = req.body;
+        console.log("Year")
 
         // Set all academic years to inactive
         await AcademicYear.updateMany({}, { Status: false });

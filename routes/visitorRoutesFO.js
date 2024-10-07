@@ -25,7 +25,7 @@ router.put('/update/:id', updateVisitorRecord);
 router.delete('/delete/:id', deleteVisitorRecord);
 
 // Update OutTime route
-router.put('/visitor/:id/outtime', updateOutTime);
+router.put('/:id/outtime', updateOutTime);
 
 module.exports = router;
     
