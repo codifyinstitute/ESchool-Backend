@@ -69,7 +69,11 @@ exports.deleteAcademicYear = async (req, res) => {
 exports.setActiveStatus = async (req, res) => {
     try {
         const { Year } = req.body;
-        console.log("Year")
+
+        const acedemic = await AcademicYear.findOne({Year});
+        if (!acedemic) {
+            return res.status(404).json({ message: "Academic Year not found" });
+        }
 
         // Set all academic years to inactive
         await AcademicYear.updateMany({}, { Status: false });
@@ -80,10 +84,6 @@ exports.setActiveStatus = async (req, res) => {
             { Status: true },
             { new: true }
         );
-
-        if (!updatedAcademicYear) {
-            return res.status(404).json({ message: "Academic Year not found" });
-        }
 
         res.status(200).json({ message: "Academic Year status set to active", updatedAcademicYear });
     } catch (error) {

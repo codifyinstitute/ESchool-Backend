@@ -22,6 +22,15 @@ const classModel = new mongoose.Schema({
         type:Number,
         required:true
     }
+    Subjects:[{
+        Subject:{
+            type:String,
+            required:true
+        },
+        Syallbus:{
+            
+        }
+    }]
 });
 
 const Class = mongoose.model("Class", classModel);
