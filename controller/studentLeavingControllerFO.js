@@ -3,11 +3,11 @@ const StudentLeaving = require('../model/studentLeavingModelFrontOffice');
 
 // Create a new student leaving record
 const addLeavingRecord = async (req, res) => {
-    const { Name, Date, Time, Class, Section, Purpose, LeavingWith, Relation, verifiedVisitorId, TimeOfLeaving, ApprovedBy } = req.body;
+    const { Name, Class, Section, Purpose, LeavingWith, Relation, verifiedVisitorId, TimeOfLeaving, ApprovedBy } = req.body;
 
     // Basic validation
-    if (!Name || !Date || !Time || !Class || !Purpose || !LeavingWith) {
-        return res.status(400).json({ message: 'Name, Date, Time, Class, Purpose, and LeavingWith are required' });
+    if (!Name || !Class || !Purpose || !LeavingWith) {
+        return res.status(400).json({ message: 'Name, Class, Purpose, and LeavingWith are required' });
     }
 
     try {

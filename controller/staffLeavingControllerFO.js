@@ -3,11 +3,11 @@ const moment = require('moment-timezone');
 
 // Create a new staff leaving record
 const addLeavingRecord = async (req, res) => {
-    const { Name, Date, Time, Department, Purpose, WillBack, TimeOfBack, VehicleUsed, TimeOfLeaving, ApprovedBy } = req.body;
+    const { Name, Department, Purpose, WillBack, TimeOfBack, VehicleUsed, TimeOfLeaving, ApprovedBy } = req.body;
 
     // Basic validation
-    if (!Name || !Date || !Time || !Department || !Purpose) {
-        return res.status(400).json({ message: 'Name, Date, Time, Department, and Purpose are required' });
+    if (!Name || !Department || !Purpose) {
+        return res.status(400).json({ message: 'Name, Department, and Purpose are required' });
     }
 
     try {
