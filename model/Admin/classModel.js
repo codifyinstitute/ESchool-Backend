@@ -21,7 +21,7 @@ const classModel = new mongoose.Schema({
     MaxCount:{
         type:Number,
         required:true
-    }
+    },
     Subjects:[{
         Subject:{
             type:String,
