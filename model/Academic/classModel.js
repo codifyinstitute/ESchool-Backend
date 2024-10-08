@@ -27,7 +27,7 @@ const classModel = new mongoose.Schema({
             type:String,
             required:true
         },
-        Syallbus:{
+        Syllabus:{
             
         }
     }]

@@ -48,3 +48,12 @@ exports.changePassword = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+const getAllLogins = async (req, res) => {
+    try {
+        const logins = await Login.find();
+        res.status(200).json(logins);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

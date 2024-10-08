@@ -1,5 +1,5 @@
 const moment = require('moment-timezone');
-const ClassModel = require('../../model/Admin/classModel');
+const ClassModel = require('../../model/Academic/classModel');
 const Academic = require('../../model/Academic/academicYearModel')
 const Counter = require('../../model/counterModel');
 
