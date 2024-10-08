@@ -6,7 +6,7 @@ const {
     getClassById,
     updateClass,
     deleteClass
-} = require('../../controller/Admin/classController');
+} = require('../../controller/Academic/classController');
 
 // Route to add a new class
 router.post('/add', addClass);

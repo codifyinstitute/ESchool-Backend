@@ -11,7 +11,7 @@ const postalRoutesFO = require('./routes/postalRoutesFO');
 const staffLeavingRoutesFO = require('./routes/staffLeavingRoutesFO');
 const studentLeavingRoutesFO = require('./routes/studentLeavingRoutesFO');
 const visitorRoutesFO = require('./routes/visitorRoutesFO');
-const classRoute = require('./routes/Admin/classRoute');
+const classRoute = require('./routes/Academic/classRoute');
 const academicYearRoute = require('./routes/Academic/academicYearRoute')
 
 app.use(cors());
