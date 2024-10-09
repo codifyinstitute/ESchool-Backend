@@ -1,13 +1,14 @@
 const moment = require('moment-timezone');
 const ClassModel = require('../../model/Academic/classModel');
-const Academic = require('../../model/Academic/academicYearModel')
+const Academic = require('../../model/Academic/academicYearModel');
 const Counter = require('../../model/counterModel');
 
 // Add a new class
 const addClass = async (req, res) => {
-    var id;
+    let id;
     const year = moment().format('YYYY');
     const month = moment().format('MM');
+
     try {
         const academicYear = await Academic.findOne({ Status: true });
 
@@ -23,11 +24,18 @@ const addClass = async (req, res) => {
             counter.Count += 1;
         }
 
-
         id = `CLS${year}${month}${counter.Count.toString().padStart(4, '0')}`;
 
-        const { Class, Section, MaxCount } = req.body;
-        const newClass = new ClassModel({ ClassId, AcademicYear: academicYear.Year, Class, Section, MaxCount });
+        const { Class, Section, MaxCount, Subjects } = req.body;
+        const newClass = new ClassModel({
+            ClassId: id, // Use the generated ID
+            AcademicYear: academicYear.Year,
+            Class,
+            Section,
+            MaxCount,
+            Subjects
+        });
+
         await newClass.save();
         res.status(201).json(newClass);
     } catch (error) {
@@ -61,11 +69,11 @@ const getClassById = async (req, res) => {
 // Update class by ClassId
 const updateClass = async (req, res) => {
     try {
-        const { ClassId, Class, Section, MaxCount } = req.body;
+        const { Class, Section, MaxCount, Subjects } = req.body;
         const updatedClass = await ClassModel.findOneAndUpdate(
             { ClassId: req.params.classId },
-            { ClassId, Class, Section, MaxCount },
-            { new: true }
+            { Class, Section, MaxCount, Subjects },
+            { new: true, runValidators: true }
         );
         if (!updatedClass) {
             return res.status(404).json({ message: "Class not found" });
@@ -92,7 +100,7 @@ const deleteClass = async (req, res) => {
 module.exports = {
     addClass,
     getAllClasses,
-    getClassById,   
+    getClassById,
     updateClass,
     deleteClass
 };

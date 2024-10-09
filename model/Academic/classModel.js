@@ -27,11 +27,18 @@ const classModel = new mongoose.Schema({
             type:String,
             required:true
         },
-        Syllabus:{
-            
+        Syllabus:[{
+            Title:{
+                type:String
+            },
+            Topics:[String]
+        }],
+        Status:{
+            type:String,
+            required:true
         }
     }]
 });
 
-const Class = mongoose.model("Class", classModel);
+const Class = mongoose.model('Class', classModel);
 module.exports = Class;
