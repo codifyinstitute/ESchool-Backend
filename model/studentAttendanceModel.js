@@ -21,6 +21,9 @@ const studentAttendanceModel = new mongoose.Schema({
         Status:{
             type:String,
             required:true
+        },
+        EarlyTime:{
+            type:String
         }
     }]
 });

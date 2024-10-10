@@ -18,6 +18,9 @@ const staffAttendanceModel = new mongoose.Schema({
             type:String,
             required:true
         },
+        EarlyTime:{
+            type:String
+        }
         
     }]
 });

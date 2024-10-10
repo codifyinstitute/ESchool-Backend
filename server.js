@@ -16,6 +16,8 @@ const academicYearRoute = require('./routes/Academic/academicYearRoute');
 const examRoutes = require('./routes/examStaticsRoute');
 const periodRoutes = require('./routes/Academic/periodRoutes');
 const timeTableRoute = require('./routes/Academic/timeTableRoute');
+const addVendorRoute = require('./routes/addVendorRoute');
+const cashDetailsRoute = require('./routes/cashDetailsRoutes');
 
 app.use(cors());
 
@@ -40,6 +42,9 @@ app.use('/academic-year', academicYearRoute);
 app.use('/exam', examRoutes);
 app.use('/period', periodRoutes);
 app.use('/timetable', timeTableRoute);
+app.use('/vendor', addVendorRoute);
+app.use('/cash-detail', cashDetailsRoute);
+
 
 app.get('/', (req, res) => res.send('<h1 style="display:flex;height: 100%;align-items: center;justify-content: center;margin:0;">Server Is Running!!!!</h1>'));
 
