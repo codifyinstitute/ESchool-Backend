@@ -8,6 +8,10 @@ const {
     deleteComplaint
 } = require('../controller/compliantControllerFO'); 
 
+
+// te tigh mala v4t hote ki test parva chalel ka coz tyanch om ani asif sobat hoat tar te ghai karat hote ki lec ghya lect ghya  
+//mhanun tyana practice karayla jamal nay mhanun tyani batch chnage keli 
+//mag te bolat ahett ki ek divas milala tar revise karu as
 // Route to add a new complaint
 router.post('/add', addComplaint);
 
