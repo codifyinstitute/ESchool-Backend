@@ -36,7 +36,7 @@ exports.addExam = async (req, res) => {
             Time,
             BluePrint:[],
             PracticalMarks,
-            TotalMarks: TheoryMaxMarks + PracticalMarks, // Adjusted for TotalMarks
+            TotalMarks: Number(TheoryMaxMarks) + Number(PracticalMarks), // Adjusted for TotalMarks
             Status
         });
         await exam.save();

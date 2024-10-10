@@ -7,7 +7,7 @@ const BankController = require('../controller/bankController');
 router.post('/add', multer.single('Logo'), BankController.addBank);
 
 // Get all 
-router.get('/all', BankController.getAll);
+router.get('/all', BankController.getAllBanks);
 
 // Get bank by ID
 router.get('/get/:id', BankController.getBankById);
