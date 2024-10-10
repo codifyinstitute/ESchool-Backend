@@ -1,23 +1,27 @@
 const moment = require('moment-timezone');
 const ExamStatic = require('../model/examStaticsmodel');
-const Academic = require('../model/Academic/academicYearModel');
+const Academic = require('../../model/Academic/academicYearModel');       
 const Counter = require('../model/counterModel');
 
 // Add a new exam
 exports.addExam = async (req, res) => {
     const {
-        ExamId,
         ExamName,
-        MaxMarks,
-        passingMarks,
-        Time,
-        BluePrint,
+        TheoryMaxMarks,
+        TheoryPassingMarks,
+        TheoryTime,
+        TheoryBluePrint,
+        PracticalMaxMarks,
+        PracticalPassingMarks,
+        PracticalTime,
+        PracticalBluePrint,
         Status
     } = req.body;
 
     let id;
     const year = moment().format('YYYY');
     try {
+        const academicYear = await Academic.findOne({ Status: true });
         let counter = await Counter.findOne({ Title: `EXM-${year}` });
 
         if (!counter) {
@@ -28,12 +32,12 @@ exports.addExam = async (req, res) => {
 
         id = `EXM${year}${counter.Count.toString().padStart(4, '0')}`;
         const exam = new ExamStatic({
-            ExamId:id,
+            ExamId: id,
+            AcademicYear: academicYear.Year,
             ExamName,
-            MaxMarks,
-            passingMarks,
-            Time,
-            BluePrint:"",
+            Theory: {},
+            Practical: {},
+            TotalMarks: 0,
             Status
         });
         await exam.save();
@@ -71,12 +75,15 @@ exports.getExamById = async (req, res) => {
 // Update an exam
 exports.updateExam = async (req, res) => {
     const {
-        ExamId,
         ExamName,
-        MaxMarks,
-        passingMarks,
-        Time,
-        BluePrint,
+        TheoryMaxMarks,
+        TheoryPassingMarks,
+        TheoryTime,
+        TheoryBluePrint,
+        PracticalMaxMarks,
+        PracticalPassingMarks,
+        PracticalTime,
+        PracticalBluePrint,
         Status
     } = req.body;
 
@@ -85,10 +92,19 @@ exports.updateExam = async (req, res) => {
             { ExamId: req.params.examId },
             {
                 ExamName,
-                MaxMarks,
-                passingMarks,
-                Time,
-                BluePrint,
+                Theory: {
+                    MaxMarks: TheoryMaxMarks,
+                    passingMarks: TheoryPassingMarks,
+                    Time: TheoryTime,
+                    BluePrint: TheoryBluePrint
+                },
+                Practical: {
+                    MaxMarks: PracticalMaxMarks,
+                    passingMarks: PracticalPassingMarks,
+                    Time: PracticalTime,
+                    BluePrint: PracticalBluePrint
+                },
+                TotalMarks: TheoryMaxMarks + PracticalMaxMarks,
                 Status
             },
             { new: true, runValidators: true }
@@ -101,7 +117,6 @@ exports.updateExam = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
-
 
 // Delete an exam
 exports.deleteExam = async (req, res) => {
