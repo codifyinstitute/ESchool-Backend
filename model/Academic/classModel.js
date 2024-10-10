@@ -14,28 +14,19 @@ const classModel = new mongoose.Schema({
         type:String,
         required:true
     },
-    Section:{
-        type:String,
-        required:true
-    },
-    MaxCount:{
-        type:Number,
-        required:true
-    },
+    Section:[String],
     Subjects:[{
         Subject:{
-            type:String,
-            required:true
+            type:String
         },
         Syllabus:[{
             Title:{
-                type:String
+                type:String  
             },
             Topics:[String]
         }],
         Status:{
-            type:String,
-            required:true
+            type:String
         }
     }]
 });
