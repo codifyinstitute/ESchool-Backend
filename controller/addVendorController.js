@@ -3,7 +3,7 @@ const Vendor = require('../model/addVendorModel');
 // Add a new vendor
 const addVendor = async (req, res) => {
     try {
-        const { Name, MobileNo, GSTNo, Address, City, Remark } = req.body; // Destructure here
+        const { Name, MobileNo, GSTNo, Address, City, Remark } = req.body;
         const vendor = new Vendor({ Name, MobileNo, GSTNo, Address, City, Remark });
         await vendor.save();
         res.status(201).json(vendor);
@@ -36,7 +36,7 @@ const getVendorById = async (req, res) => {
 // Update a vendor by ID
 const updateVendor = async (req, res) => {
     try {
-        const { Name, MobileNo, GSTNo, Address, City, Remark } = req.body; // Destructure here
+        const { Name, MobileNo, GSTNo, Address, City, Remark } = req.body;
         const vendor = await Vendor.findByIdAndUpdate(
             req.params.id,
             { Name, MobileNo, GSTNo, Address, City, Remark },
@@ -54,7 +54,7 @@ const deleteVendor = async (req, res) => {
     try {
         const vendor = await Vendor.findByIdAndDelete(req.params.id);
         if (!vendor) return res.status(404).json({ message: 'Vendor not found' });
-        res.status(204).send(); // No content
+        res.status(204).send();
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
