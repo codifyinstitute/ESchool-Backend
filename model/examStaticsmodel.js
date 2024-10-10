@@ -16,9 +16,9 @@ const examStaticsModel = new mongoose.Schema({
         }],
     },
     Practical: {
-        MaxMarks: { type: Number, required: true },
-        passingMarks: { type: Number, required: true },
-        Time: { type: String, required: true },
+        MaxMarks: { type: Number},
+        passingMarks: { type: Number},
+        Time: { type: String},
         BluePrint: [{
             Section: { type: String },
             QuestionNo: { type: Number },
