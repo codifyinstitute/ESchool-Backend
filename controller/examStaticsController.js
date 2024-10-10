@@ -33,7 +33,7 @@ exports.addExam = async (req, res) => {
             MaxMarks,
             passingMarks,
             Time,
-            BluePrint,
+            BluePrint:"",
             Status
         });
         await exam.save();
@@ -41,6 +41,7 @@ exports.addExam = async (req, res) => {
         res.status(201).json(exam);
     } catch (error) {
         res.status(400).json({ message: error.message });
+        console.log(error);
     }
 };
 
