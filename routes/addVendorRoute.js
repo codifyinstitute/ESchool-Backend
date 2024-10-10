@@ -6,7 +6,7 @@ const VendorController = require('../controller/addVendorController');
 router.post('/add', VendorController.addVendor);
 
 // Get all 
-router.get('/all', VendorController.getAll);
+router.get('/all', VendorController.getAllVendors);
 
 // Get a vendor by ID
 router.get('/get/:id', VendorController.getVendorById);
