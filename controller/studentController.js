@@ -3,7 +3,7 @@ const path = require('path');
 const moment = require('moment-timezone');
 const Student = require('../model/studentModel');
 const Counter = require('../model/counterModel');
-const Login = require('../model/loginModel'); // Ensure this model is defined
+const Login = require('../model/loginModel'); 
 
 // Add a new student
 const addStudent = async (req, res) => {
