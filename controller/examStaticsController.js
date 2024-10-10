@@ -1,6 +1,6 @@
 const moment = require('moment-timezone');
 const ExamStatic = require('../model/examStaticsmodel');
-const Academic = require('../../model/Academic/academicYearModel');       
+const Academic = require('../model/Academic/academicYearModel');       
 const Counter = require('../model/counterModel');
 
 // Add a new exam
@@ -8,13 +8,9 @@ exports.addExam = async (req, res) => {
     const {
         ExamName,
         TheoryMaxMarks,
-        TheoryPassingMarks,
-        TheoryTime,
-        TheoryBluePrint,
-        PracticalMaxMarks,
-        PracticalPassingMarks,
-        PracticalTime,
-        PracticalBluePrint,
+        TheorypassingMarks,
+        Time,
+        PracticalMarks,
         Status
     } = req.body;
 
@@ -35,9 +31,12 @@ exports.addExam = async (req, res) => {
             ExamId: id,
             AcademicYear: academicYear.Year,
             ExamName,
-            Theory: {},
-            Practical: {},
-            TotalMarks: 0,
+            TheoryMaxMarks,
+            TheorypassingMarks,
+            Time,
+            BluePrint:[],
+            PracticalMarks,
+            TotalMarks: TheoryMaxMarks + PracticalMarks, // Adjusted for TotalMarks
             Status
         });
         await exam.save();
@@ -77,13 +76,10 @@ exports.updateExam = async (req, res) => {
     const {
         ExamName,
         TheoryMaxMarks,
-        TheoryPassingMarks,
-        TheoryTime,
-        TheoryBluePrint,
-        PracticalMaxMarks,
-        PracticalPassingMarks,
-        PracticalTime,
-        PracticalBluePrint,
+        TheorypassingMarks,
+        Time,
+        BluePrint,
+        PracticalMarks,
         Status
     } = req.body;
 
@@ -92,19 +88,12 @@ exports.updateExam = async (req, res) => {
             { ExamId: req.params.examId },
             {
                 ExamName,
-                Theory: {
-                    MaxMarks: TheoryMaxMarks,
-                    passingMarks: TheoryPassingMarks,
-                    Time: TheoryTime,
-                    BluePrint: TheoryBluePrint
-                },
-                Practical: {
-                    MaxMarks: PracticalMaxMarks,
-                    passingMarks: PracticalPassingMarks,
-                    Time: PracticalTime,
-                    BluePrint: PracticalBluePrint
-                },
-                TotalMarks: TheoryMaxMarks + PracticalMaxMarks,
+                TheoryMaxMarks,
+                TheorypassingMarks,
+                Time,
+                BluePrint,
+                PracticalMarks,
+                TotalMarks: TheoryMaxMarks + PracticalMarks,
                 Status
             },
             { new: true, runValidators: true }
