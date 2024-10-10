@@ -28,7 +28,7 @@ const addClass = async (req, res) => {
 
         const { Class, Section, MaxCount, Subjects } = req.body;
         const newClass = new ClassModel({
-            ClassId: id, // Use the generated ID
+            ClassId: id,
             AcademicYear: academicYear.Year,
             Class,
             Section,
