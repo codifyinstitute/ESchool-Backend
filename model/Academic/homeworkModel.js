@@ -1,14 +1,43 @@
 const mongoose = require('mongoose');
 
 const homeworkModel = new mongoose.Schema({
+    Date: {
+        type: String,
+        required: true
+    },
+    Type: {
+        type: String,
+        required: true
+    },
+    Class: {
+        type: String,
+        required: true
+    },
+    Section: {
+        type: String,
+        required: true
+    },
+    Subject: {
+        type: String,
+        required: true
+    },
+    Character: {
+        type: String,
+        required: true
+    },
     Title: {
         type: String,
         required: true
     },
-    Count: {
-        type: Number,
+    Details: {
+        type: String,
         required: true
+    },
+    Status:{
+        type:String,
+        required:true
     }
+
 });
 
 const Homework = mongoose.model("Homework", homeworkModel);
