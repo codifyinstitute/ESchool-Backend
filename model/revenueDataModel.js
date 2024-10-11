@@ -5,6 +5,10 @@ const revenueDataModel = new mongoose.Schema({
         type: String,
         required: true
     },
+    Type:{
+        type:String,
+        required:true
+    },
     Label: {
         type: String,
         required: true

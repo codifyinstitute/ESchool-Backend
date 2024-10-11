@@ -20,7 +20,7 @@ const addVendorRoute = require('./routes/addVendorRoute');
 const cashDetailsRoute = require('./routes/cashDetailsRoutes');
 const BankRoute = require('./routes/bankRoutes');
 const expenseHeaderRoute = require('./routes/expenseHeaderRoutes');
-const RevenueDataRoute = require('./routes/expenseHeaderRoutes');
+const RevenueDataRoute = require('./routes/revenueDataRoutes');
 const homeworkRoutes = require('./routes/Academic/homeworkRoutes');
 
 app.use(cors());
