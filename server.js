@@ -22,6 +22,7 @@ const BankRoute = require('./routes/bankRoutes');
 const expenseHeaderRoute = require('./routes/expenseHeaderRoutes');
 const RevenueDataRoute = require('./routes/revenueDataRoutes');
 const homeworkRoutes = require('./routes/Academic/homeworkRoutes');
+const addSubjectRoute = require('./routes/addsubjectRoutes');
 
 app.use(cors());
 
@@ -52,6 +53,7 @@ app.use('/bank', BankRoute);
 app.use('/expense-header', expenseHeaderRoute);
 app.use('/revenue', RevenueDataRoute);
 app.use('/homework', homeworkRoutes);
+app.use('/add-subject', addSubjectRoute);
 
 
 app.get('/', (req, res) => res.send('<h1 style="display:flex;height: 100%;align-items: center;justify-content: center;margin:0;">Server Is Running!!!!</h1>'));

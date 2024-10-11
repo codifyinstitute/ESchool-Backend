@@ -36,12 +36,12 @@ exports.getRevenueDataById = async (req, res) => {
 
 // Update revenue data by ID
 exports.updateRevenueData = async (req, res) => {
-    const { Date, Label, Name, Amount, Vendor, PaymentMode,Type, Detail } = req.body; // Destructure fields
+    const { Date, Label, Name, Amount, Vendor, PaymentMode, Type, Detail } = req.body; // Destructure fields
 
     try {
         const revenueData = await RevenueData.findByIdAndUpdate(
             req.params.id,
-            { Date, Label, Name, Amount, Vendor, PaymentMode,Type, Detail },
+            { Date, Label, Name, Amount, Vendor, PaymentMode, Type, Detail },
             { new: true, runValidators: true }
         );
         if (!revenueData) return res.status(404).json({ message: 'Revenue data not found' });
