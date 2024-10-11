@@ -93,7 +93,7 @@ exports.updateExam = async (req, res) => {
                 Time,
                 BluePrint,
                 PracticalMarks,
-                TotalMarks: TheoryMaxMarks + PracticalMarks,
+                TotalMarks: Number(TheoryMaxMarks) + Number(PracticalMarks),
                 Status
             },
             { new: true, runValidators: true }
@@ -104,6 +104,7 @@ exports.updateExam = async (req, res) => {
         res.status(200).json(exam);
     } catch (error) {
         res.status(400).json({ message: error.message });
+        console.log(error);
     }
 };
 
