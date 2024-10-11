@@ -10,6 +10,7 @@ exports.createRevenueData = async (req, res) => {
         res.status(201).json(revenueData);
     } catch (error) {
         res.status(400).json({ message: error.message });
+        console.log(error);
     }
 };
 

@@ -3,13 +3,14 @@ const ExpenseHeader = require('../model/addExpenseHeaderModel');
 // Create a new expense header
 exports.createExpenseHeader = async (req, res) => {
     const { Title, Type, Description } = req.body;
-
+    console.log(req.body);
     try {
-        const expenseHeader = new ExpenseHeader({ Title, Description });
+        const expenseHeader = new ExpenseHeader({ Title, Type, Description });
         await expenseHeader.save();
         res.status(201).json(expenseHeader);
     } catch (error) {
         res.status(400).json({ message: error.message });
+        console.log(error);
     }
 };
 
