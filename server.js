@@ -22,7 +22,7 @@ const BankRoute = require('./routes/bankRoutes');
 const expenseHeaderRoute = require('./routes/expenseHeaderRoutes');
 const RevenueDataRoute = require('./routes/revenueDataRoutes');
 const homeworkRoutes = require('./routes/Academic/homeworkRoutes');
-const addSubjectRoute = require('./routes/addsubjectRoutes');
+const addSubjectRoute = require('./routes/addSubjectRoutes');
 const teachingProgressRoutes = require('./routes/Academic/teachingProgressRoutes');
 const studentAttendanceRoutes = require('./routes/studentAttendanceRoutes');
 
