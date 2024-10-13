@@ -18,7 +18,7 @@ const studentLeavingModelFrontOffice = new mongoose.Schema({
         required:true
     },
     Section:{
-        type:Number
+        type:String
     },
     Purpose:{
         type:String,

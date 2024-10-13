@@ -28,6 +28,7 @@ const addLeavingRecord = async (req, res) => {
         res.status(201).json(leavingRecord);
     } catch (error) {
         res.status(500).json({ message: error.message });
+        console.log(error);
     }
 };
 
