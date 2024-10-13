@@ -22,7 +22,10 @@ const studentAttendanceModel = new mongoose.Schema({
             type:String,
             required:true
         },
-        EarlyTime:{
+        InTime:{
+            type:String
+        },
+        OutTime:{
             type:String
         }
     }]

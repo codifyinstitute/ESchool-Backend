@@ -19,6 +19,12 @@ const timeTableRoute = require('./routes/Academic/timeTableRoute');
 const addVendorRoute = require('./routes/addVendorRoute');
 const cashDetailsRoute = require('./routes/cashDetailsRoutes');
 const BankRoute = require('./routes/bankRoutes');
+const expenseHeaderRoute = require('./routes/expenseHeaderRoutes');
+const RevenueDataRoute = require('./routes/revenueDataRoutes');
+const homeworkRoutes = require('./routes/Academic/homeworkRoutes');
+const addSubjectRoute = require('./routes/addSubjectRoutes');
+const teachingProgressRoutes = require('./routes/Academic/teachingProgressRoutes');
+const studentAttendanceRoutes = require('./routes/studentAttendanceRoutes');
 
 app.use(cors());
 
@@ -46,6 +52,12 @@ app.use('/timetable', timeTableRoute);
 app.use('/vendor', addVendorRoute);
 app.use('/cash-detail', cashDetailsRoute);
 app.use('/bank', BankRoute);
+app.use('/expense-header', expenseHeaderRoute);
+app.use('/revenue', RevenueDataRoute);
+app.use('/homework', homeworkRoutes);
+app.use('/add-subject', addSubjectRoute);
+app.use('/teaching-progress', teachingProgressRoutes);
+app.use('/student-attendance', studentAttendanceRoutes);
 
 
 app.get('/', (req, res) => res.send('<h1 style="display:flex;height: 100%;align-items: center;justify-content: center;margin:0;">Server Is Running!!!!</h1>'));

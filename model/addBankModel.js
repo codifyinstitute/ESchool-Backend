@@ -5,21 +5,21 @@ const addBankModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    Logo: {
+    HolderName: {
         type: String,
         required: true
     },
     AccountNo: {
-        type: Number,
-        required: true
-    },
-    OpeningBalance: {
         type: String,
         required: true
     },
-    Primary:{
-        type: Boolean,
-        default: false
+    IFSCCode: {
+        type: String,
+        required: true
+    },
+    BranchName :{
+        type: String,
+        default: true
     },
     Remark: {
         type: String,
