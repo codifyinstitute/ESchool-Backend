@@ -1,21 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('../config/multerConfig');
-const BankController = require('../controller/bankController');
+const bankController = require('../controller/bankController');
 
-// Add bank details with image upload
-router.post('/add', multer.single('Logo'), BankController.addBank);
+// Create a new bank entry
+router.post('/add', bankController.createBank);
 
-// Get all 
-router.get('/all', BankController.getAllBanks);
+// Get all bank entries
+router.get('/all', bankController.getAllBanks);
 
-// Get bank by ID
-router.get('/get/:id', BankController.getBankById);
+// Get a bank entry by ID
+router.get('/get/:id', bankController.getBankById);
 
-// Update bank by ID with image upload
-router.put('/update/:id', multer.single('Logo'), BankController.updateBank);
+// Update a bank entry by ID
+router.put('/update/:id', bankController.updateBank);
 
-// Delete bank by ID
-router.delete('/delete/:id', BankController.deleteBank);
+// Delete a bank entry by ID
+router.delete('/delete/:id', bankController.deleteBank);
 
 module.exports = router;
