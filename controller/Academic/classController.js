@@ -37,6 +37,7 @@ const addClass = async (req, res) => {
         });
 
         await newClass.save();
+        await counter.save();
         res.status(201).json(newClass);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -68,6 +69,7 @@ const getClassById = async (req, res) => {
 
 // Update class by ClassId
 const updateClass = async (req, res) => {
+    console.log(req.body);
     try {
         const { Class, Section, MaxCount, Subjects } = req.body;
         const updatedClass = await ClassModel.findOneAndUpdate(
