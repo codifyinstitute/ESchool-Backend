@@ -1,10 +1,10 @@
-const CashDetails = require('../model/addCashDetails'); 
+const CashDetails = require('../model/addCashDetails');
 
 // Add cash details
 const addCashDetails = async (req, res) => {
     try {
-        const { Type, Date, Amount, Bank, Remark } = req.body; // Destructure here
-        const cashDetails = new CashDetails({ Type, Date, Amount, Bank, Remark });
+        const { Type, Date, Amount, ByWhom, Bank, Remark } = req.body; // Destructure here
+        const cashDetails = new CashDetails({ Type, Date, Amount, ByWhom, Bank, Remark });
         await cashDetails.save();
         res.status(201).json(cashDetails);
     } catch (error) {
@@ -19,6 +19,7 @@ const getAllCashDetails = async (req, res) => {
         res.status(200).json(cashDetails);
     } catch (error) {
         res.status(500).json({ message: error.message });
+        console.log(error);
     }
 };
 
@@ -36,10 +37,10 @@ const getCashDetailsById = async (req, res) => {
 // Update cash details by ID
 const updateCashDetails = async (req, res) => {
     try {
-        const { Type, Date, Amount, Bank, Remark } = req.body; // Destructure here
+        const { Type, Date, Amount, ByWhom, Bank, Remark } = req.body; // Destructure here
         const cashDetail = await CashDetails.findByIdAndUpdate(
             req.params.id,
-            { Type, Date, Amount, Bank, Remark },
+            { Type, Date, Amount, ByWhom, Bank, Remark },
             { new: true, runValidators: true }
         );
         if (!cashDetail) return res.status(404).json({ message: 'Cash detail not found' });
@@ -57,6 +58,7 @@ const deleteCashDetails = async (req, res) => {
         res.status(204).send(); // No content
     } catch (error) {
         res.status(500).json({ message: error.message });
+        console.log(error);
     }
 };
 

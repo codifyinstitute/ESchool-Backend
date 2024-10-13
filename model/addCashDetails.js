@@ -13,6 +13,10 @@ const addCashDetails = new mongoose.Schema({
         type: Number,
         required: true
     },
+    ByWhom: {
+        type: String,
+        required: true
+    },
     Bank: {
         type: String,
         required: true
