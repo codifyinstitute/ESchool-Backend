@@ -3,6 +3,7 @@ const moment = require('moment-timezone');
 
 // Create a new staff leaving record
 const addLeavingRecord = async (req, res) => {
+    console.log(req.body);
     const { Name, Department, Purpose, WillBack, TimeOfBack, VehicleUsed, TimeOfLeaving, ApprovedBy } = req.body;
 
     // Basic validation
@@ -13,8 +14,8 @@ const addLeavingRecord = async (req, res) => {
     try {
         const leavingRecord = new StaffLeaving({
             Name,
-            Date:moment().tz("Asia/Kolkata").format('DD-MM-YYYY'),
-            Time:moment().tz("Asia/Kolkata").format('HH:MM:SS'),
+            Date: moment().tz("Asia/Kolkata").format('DD-MM-YYYY'),
+            Time: moment().tz("Asia/Kolkata").format('HH:MM:SS'),
             Department,
             Purpose,
             WillBack,
@@ -27,6 +28,7 @@ const addLeavingRecord = async (req, res) => {
         res.status(201).json(leavingRecord);
     } catch (error) {
         res.status(500).json({ message: error.message });
+        console.log(error);
     }
 };
 

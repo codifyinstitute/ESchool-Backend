@@ -6,7 +6,9 @@ const Counter = require('../model/counterModel');
 const Login = require('../model/loginModel'); 
 
 // Add a new student
+
 const addStudent = async (req, res) => {
+    console.log(req.body);
     const month = moment().format('MM');
     const year = moment().format('YYYY');
     let id;
