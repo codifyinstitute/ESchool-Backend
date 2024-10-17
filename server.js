@@ -34,6 +34,8 @@ const gradeRoutes = require('./routes/gradeRoutes');
 const designationRoutes = require('./routes/designationRoutes');
 const roleRoutes = require('./routes/rolesRoutes');
 const departmentRoutes = require('./routes/departmentRoutes')
+const feeDataRoutes = require('./routes/feeDataRoutes');
+const payrollDataRoutes = require('./routes/payrollDataRoutes');
 const schoolsetupRoutes = require('./routes/schoolSetupRoutes')
 
 app.use(cors());
@@ -77,6 +79,9 @@ app.use('/grade', gradeRoutes);
 app.use('/designation', designationRoutes);
 app.use('/role', roleRoutes);
 app.use('/department', departmentRoutes);
+app.use('/fee-data', feeDataRoutes);
+app.use('/payroll-data', payrollDataRoutes);
+
 app.use('/schoolsetup', schoolsetupRoutes);
 
 
