@@ -27,6 +27,8 @@ const teachingProgressRoutes = require('./routes/Academic/teachingProgressRoutes
 const studentAttendanceRoutes = require('./routes/studentAttendanceRoutes');
 const feeHeaderRoutes = require('./routes/feeHeaderRoutes');
 const feeSlabRoutes = require('./routes/feeSlabRoutes');
+const fineSetupRoutes = require('./routes/fineSetupRoutes');
+const discountRoutes = require('./routes/discountRoutes');
 
 app.use(cors());
 
@@ -60,8 +62,11 @@ app.use('/homework', homeworkRoutes);
 app.use('/add-subject', addSubjectRoute);
 app.use('/teaching-progress', teachingProgressRoutes);
 app.use('/student-attendance', studentAttendanceRoutes);
-app.use('/feeHeaders', feeHeaderRoutes);
-app.use('/api/feeSlabs', feeSlabRoutes);
+app.use('/feeHeader', feeHeaderRoutes);
+app.use('/feeSlab', feeSlabRoutes);
+app.use('/fine-setup', fineSetupRoutes);
+app.use('/discount', discountRoutes);
+
 
 app.get('/', (req, res) => res.send('<h1 style="display:flex;height: 100%;align-items: center;justify-content: center;margin:0;">Server Is Running!!!!</h1>'));
 
