@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const designationModel = new mongoose.Schema({
-    DepartmentName: {
+    DesignationName: {
         type: String,
         required: true
     },

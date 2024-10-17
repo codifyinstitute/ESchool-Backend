@@ -32,6 +32,8 @@ const discountRoutes = require('./routes/discountRoutes');
 const payrollHeaderRoutes = require('./routes/payrollHeaderRoutes');
 const gradeRoutes = require('./routes/gradeRoutes');
 const designationRoutes = require('./routes/designationRoutes');
+const roleRoutes = require('./routes/rolesRoutes');
+const departmentRoutes = require('./routes/departmentRoutes')
 const feeDataRoutes = require('./routes/feeDataRoutes');
 const payrollDataRoutes = require('./routes/payrollDataRoutes');
 
@@ -74,7 +76,8 @@ app.use('/discount', discountRoutes);
 app.use('/payroll-header', payrollHeaderRoutes);
 app.use('/grade', gradeRoutes);
 app.use('/designation', designationRoutes);
-app.use('/fee-data', feeDataRoutes);
+app.use('/role', roleRoutes);
+app.use('/department', departmentRoutes);app.use('/fee-data', feeDataRoutes);
 app.use('/payroll-data', payrollDataRoutes);
 
 

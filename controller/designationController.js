@@ -24,7 +24,7 @@ exports.getDesignationById = async (req, res) => {
 // Create a new designation
 exports.createDesignation = async (req, res) => {
     const designation = new Designation({
-        DepartmentName: req.body.DepartmentName,
+        DesignationName: req.body.DesignationName,
         Description: req.body.Description
     });
 
