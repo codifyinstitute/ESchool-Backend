@@ -32,6 +32,8 @@ const discountRoutes = require('./routes/discountRoutes');
 const payrollHeaderRoutes = require('./routes/payrollHeaderRoutes');
 const gradeRoutes = require('./routes/gradeRoutes');
 const designationRoutes = require('./routes/designationRoutes');
+const feeDataRoutes = require('./routes/feeDataRoutes');
+const payrollDataRoutes = require('./routes/payrollDataRoutes');
 
 app.use(cors());
 
@@ -71,8 +73,9 @@ app.use('/fine-setup', fineSetupRoutes);
 app.use('/discount', discountRoutes);
 app.use('/payroll-header', payrollHeaderRoutes);
 app.use('/grade', gradeRoutes);
-
 app.use('/designation', designationRoutes);
+app.use('/fee-data', feeDataRoutes);
+app.use('/payroll-data', payrollDataRoutes);
 
 
 app.get('/', (req, res) => res.send('<h1 style="display:flex;height: 100%;align-items: center;justify-content: center;margin:0;">Server Is Running!!!!</h1>'));
