@@ -30,6 +30,7 @@ const feeSlabRoutes = require('./routes/feeSlabRoutes');
 const fineSetupRoutes = require('./routes/fineSetupRoutes');
 const discountRoutes = require('./routes/discountRoutes');
 const payrollHeaderRoutes = require('./routes/payrollHeaderRoutes');
+const gradeRoutes = require('./routes/gradeRoutes');
 
 app.use(cors());
 
@@ -67,7 +68,8 @@ app.use('/feeHeader', feeHeaderRoutes);
 app.use('/feeSlab', feeSlabRoutes);
 app.use('/fine-setup', fineSetupRoutes);
 app.use('/discount', discountRoutes);
-app.use('/payroll-headers', payrollHeaderRoutes);
+app.use('/payroll-header', payrollHeaderRoutes);
+app.use('/grade', gradeRoutes);
 
 
 
