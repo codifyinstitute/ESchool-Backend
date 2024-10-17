@@ -77,7 +77,8 @@ app.use('/payroll-header', payrollHeaderRoutes);
 app.use('/grade', gradeRoutes);
 app.use('/designation', designationRoutes);
 app.use('/role', roleRoutes);
-app.use('/department', departmentRoutes);app.use('/fee-data', feeDataRoutes);
+app.use('/department', departmentRoutes);
+app.use('/fee-data', feeDataRoutes);
 app.use('/payroll-data', payrollDataRoutes);
 
 
