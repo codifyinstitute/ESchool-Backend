@@ -2,10 +2,10 @@ const Grade = require('../model/gradeModel');
 
 // Create a new Grade
 exports.createGrade = async (req, res) => {
-    const { Title, Type } = req.body; 
+    const { Title, Salary } = req.body; 
 
     try {
-        const grade = new Grade({ Title, Type });
+        const grade = new Grade({ Title, Salary });
         await grade.save();
         res.status(201).json(grade);
     } catch (error) {
@@ -36,10 +36,10 @@ exports.getGradeById = async (req, res) => {
 
 // Update a Grade by ID
 exports.updateGrade = async (req, res) => {
-    const { Title, Type } = req.body;
+    const { Title, Salary } = req.body;
 
     try {
-        const grade = await Grade.findByIdAndUpdate(req.params.id, { Title, Type }, { new: true });
+        const grade = await Grade.findByIdAndUpdate(req.params.id, { Title, Salary }, { new: true });
         if (!grade) return res.status(404).json({ message: 'Grade not found' });
         res.status(200).json(grade);
     } catch (error) {

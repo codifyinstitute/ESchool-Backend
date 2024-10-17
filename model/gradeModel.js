@@ -5,7 +5,7 @@ const gradeModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    Type:{
+    Salary:{
         type: String,
         required: true
     }
