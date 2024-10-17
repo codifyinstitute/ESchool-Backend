@@ -80,6 +80,7 @@ exports.updateExam = async (req, res) => {
         Time,
         BluePrint,
         PracticalMarks,
+        TotalMarks,
         Status
     } = req.body;
 
@@ -93,7 +94,7 @@ exports.updateExam = async (req, res) => {
                 Time,
                 BluePrint,
                 PracticalMarks,
-                TotalMarks: Number(TheoryMaxMarks) + Number(PracticalMarks),
+                TotalMarks,
                 Status
             },
             { new: true, runValidators: true }
