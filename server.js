@@ -36,7 +36,10 @@ const roleRoutes = require('./routes/rolesRoutes');
 const departmentRoutes = require('./routes/departmentRoutes')
 const feeDataRoutes = require('./routes/feeDataRoutes');
 const payrollDataRoutes = require('./routes/payrollDataRoutes');
-const schoolsetupRoutes = require('./routes/schoolSetupRoutes')
+const schoolsetupRoutes = require('./routes/schoolSetupRoutes');
+const academicYearInfoRoutes = require('./routes/academicYearInfoRoutes');
+const academicYearPlanRoutes = require('./routes/academicYearPlanRoutes');
+const datesheetRoutes = require('./routes/datesheetRoutes');
 
 app.use(cors());
 
@@ -81,8 +84,10 @@ app.use('/role', roleRoutes);
 app.use('/department', departmentRoutes);
 app.use('/fee-data', feeDataRoutes);
 app.use('/payroll-data', payrollDataRoutes);
-
+app.use('/academic-year-info', academicYearInfoRoutes);
+app.use('/academic-year-plan', academicYearPlanRoutes);
 app.use('/schoolsetup', schoolsetupRoutes);
+app.use('/datesheet', datesheetRoutes);
 
 
 app.get('/', (req, res) => res.send('<h1 style="display:flex;height: 100%;align-items: center;justify-content: center;margin:0;">Server Is Running!!!!</h1>'));
