@@ -27,6 +27,7 @@ exports.updateFeeHeader = async (req, res) => {
         res.json(feeHeader);
     } catch (error) {
         res.status(400).json({ message: error.message });
+        console.log(error);
     }
 };
 
