@@ -11,8 +11,7 @@ const enquiryModel = new mongoose.Schema({
         required:true
     },
     DOB:{
-        type:String,
-        required:true
+        type:String
     },
     Gender:{
         type:String,

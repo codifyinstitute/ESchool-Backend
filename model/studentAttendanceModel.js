@@ -15,12 +15,10 @@ const studentAttendanceModel = new mongoose.Schema({
     },
     Attendance:[{
         RollNo:{
-            type:Number,
-            required:true
+            type:Number
         },
         Status:{
-            type:String,
-            required:true
+            type:String
         },
         InTime:{
             type:String

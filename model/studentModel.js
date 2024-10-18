@@ -19,128 +19,100 @@ const studentModel = new mongoose.Schema({
         required: true
     },
     Religion: {
-        type: String,
-        required: true
+        type: String
     },
     BloodGroup: {
-        type: String,
-        required: true
+        type: String
     },
     Category: {
-        type: String,
-        required: true
+        type: String
     },
     Height: {
-        type: String,
-        required: true
+        type: String
     },
     Weight: {
-        type: String,
-        required: true
+        type: String
     },
     AadharNumber: {
-        type: String,
-        required: true
+        type: String
     },
     MobileNo: {
         type: String,
         required: true
     },
     Email:{
-        type:String,
-        required:true
+        type:String
     },
     Address: {
-        type: String,
-        required: true
+        type: String
     },
     City: {
-        type: String,
-        required: true
+        type: String
     },
     Area: {
-        type: String,
-        required: true
+        type: String
     },
     Pincode: {
-        type: String,
-        required: true
+        type: String
     },
     AdmissionDate: {
-        type: String,
-        required: true
+        type: String
     },
     Stream: {
-        type: String,
-        required: true
+        type: String
     },
     AdmissionInClass: {
         type: String,
         required: true
     },
     House:{
-        type: String,
-        required: true
+        type: String
     },
     FeeCategory: {
         type: String,
         required: true
     },
     RollNo: {
-        type: String,
-        required: true
+        type: String
     },
     LastSchoolAttended: {
-        type: String,
-        required: true
+        type: String
     },
     IdentificationMark: {
-        type: String,
-        required: true
+        type: String
     },
     SourceOfAdmission: {
-        type: String,
-        required: true
+        type: String
     },
     TransportNeeded: {
-        type: Boolean,
-        default: false
+        type: Boolean
     },
     Route: {
-        type: String,
-        required: true
+        type: String
     },
     FeeDiscount: {
-        type: String,
-        required: true
+        type: String
     },
     BankName: {
-        type: String,
-        required: true
+        type: String
     },
     BankAccountNumber: {
-        type: Number,
-        required: true
+        type: Number
     },
     IFSC: {
-        type: String,
-        required: true
+        type: String
     },
     Disability: {
-        type: Boolean,
-        required: true
+        type: Boolean
     },
     DisabilityName: {
-        type: String,
-        required: true
+        type: String
     },
     Discount: {
-        type: String,
-        required: true
+        type: String
     },
     Orphan: {
-        type: Boolean,
-        required: true
+        type: Boolean
     },
     Subject: [String],
     FatherDetail: {
@@ -149,28 +121,23 @@ const studentModel = new mongoose.Schema({
             required: true
         },
         Qualification: {
-            type: String,
-            required: true
+            type: String
         },
         Occupation: {
-            type: String,
-            required: true
+            type: String
         },
         AnnualIncome: {
-            type: String,
-            required: true
+            type: String
         },
         AadharNumber: {
-            type: String,
-            required: true
+            type: String
         },
         MobileNo: {
             type: String,
             required: true
         },
         EmailId: {
-            type: String,
-            required: true
+            type: String
         },
     },
     MotherDetails: {
@@ -179,42 +146,34 @@ const studentModel = new mongoose.Schema({
             required: true
         },
         Qualification: {
-            type: String,
-            required: true
+            type: String
         },
         Occupation: {
-            type: String,
-            required: true
+            type: String
         },
         AnnualIncome: {
-            type: String,
-            required: true
+            type: String
         },
         AadharNumber: {
-            type: String,
-            required: true
+            type: String
         },
         MobileNo: {
             type: String,
             required: true
         },
         EmailId: {
-            type: String,
-            required: true
+            type: String
         }
     },
     EmergencyContact:{
         Name: {
-            type: String,
-            required: true
+            type: String
         },
         Relation: {
-            type: String,
-            required: true
+            type: String
         },
         MobileNo: {
-            type: String,
-            required: true
+            type: String
         },
     },
     Document:{
@@ -228,12 +187,10 @@ const studentModel = new mongoose.Schema({
             type: String,
         },
         FatherPhoto: {
-            type: String,
-            required: true
+            type: String
         },
         MotherPhoto: {
-            type: String,
-            required: true
+            type: String
         }
     }   
 });

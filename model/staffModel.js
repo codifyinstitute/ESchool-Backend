@@ -12,7 +12,7 @@ const staffModel = new mongoose.Schema({
     },
     Department: {
         type: String,
-        required: true
+        required: false
     },
     Name: {
         type: String,
@@ -59,20 +59,16 @@ const staffModel = new mongoose.Schema({
         required: true
     },
     Experience: {
-        type: String,
-        required: true
+        type: String
     },
     LastSchool: {
-        type: String,
-        required: true
+        type: String
     },
     ReferredName: {
-        type: String,
-        required: true
+        type: String
     },
     ReferredContact: {
-        type: String,
-        required: true
+        type: String
     },
     Transport: {
         type: Boolean
@@ -81,24 +77,19 @@ const staffModel = new mongoose.Schema({
         type: String
     },
     Address: {
-        type: String,
-        required: true
+        type: String
     },
     City: {
-        type: String,
-        required: true
+        type: String
     },
     Area: {
-        type: String,
-        required: true
+        type: String
     },
     Pincode: {
-        type: String,
-        required: true
+        type: String
     },
     Religion: {
-        type: String,
-        required: true
+        type: String
     },
     MaritalStatus: {
         type: String,
@@ -106,22 +97,19 @@ const staffModel = new mongoose.Schema({
     },
     FamilyDetail: {
         MiddleName: {
-            type: String,
-            required: true
+            type: String
         },
         MobileNo: {
             type: String,
             required: true
         },
         EmailId: {
-            type: String,
-            required: true
+            type: String
         }
     },
     EmergencyContact: {
         Name: {
-            type: String,
-            required: true
+            type: String
         },
         MobileNo: {
             type: String,
