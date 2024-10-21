@@ -3,8 +3,14 @@ const FeeSlab = require('../model/feeSlabModel');
 // Add a new FeeSlab
 exports.addFeeSlab = async (req, res) => {
     try {
-        const { Class, Fees, TotalFee } = req.body; 
-        const feeSlab = new FeeSlab({ Class, Fees, TotalFee });
+        const { Class, Fees, ClassId, TotalFee } = req.body;
+        const fee = await FeeSlab.findOne({ ClassId });
+        
+        if (fee) {
+            return res.status(400).json({ message: "Class already exists" });
+        }
+
+        const feeSlab = new FeeSlab({ Class, ClassId, Fees, TotalFee });
         await feeSlab.save();
         res.status(201).json(feeSlab);
     } catch (error) {
@@ -16,10 +22,10 @@ exports.addFeeSlab = async (req, res) => {
 // Update a FeeSlab by ID
 exports.updateFeeSlab = async (req, res) => {
     try {
-        const { Class, Fees, TotalFee } = req.body;
+        const { Class, ClassId, Fees, TotalFee } = req.body;
         const feeSlab = await FeeSlab.findByIdAndUpdate(
             req.params.id,
-            { Class, Fees, TotalFee },
+            { Class, Fees, ClassId, TotalFee },
             { new: true }
         );
         if (!feeSlab) {

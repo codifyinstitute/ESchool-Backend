@@ -5,6 +5,11 @@ const feeSlabModel = new mongoose.Schema({
         type:String,
         required:true
     },
+    ClassId:{
+        type:String,
+        required:true,
+        unique:true
+    },
     Fees:[{
         Name:{
             type:String
