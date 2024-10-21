@@ -7,6 +7,7 @@ router.get('/all', academicYearInfoController.getAllAcademicYears);
 router.get('/get/:id', academicYearInfoController.getAcademicYearById);
 router.post('/add', academicYearInfoController.createAcademicYear);
 router.put('/update/:id', academicYearInfoController.updateAcademicYear);
+router.put('/active/:id', academicYearInfoController.setActiveStatus);
 router.delete('/delete/:id', academicYearInfoController.deleteAcademicYear);
 
 module.exports = router;

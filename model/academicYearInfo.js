@@ -17,6 +17,11 @@ const academicYearInfoModel = new mongoose.Schema({
         type:String,
         required:true
     },
+    AcademicYear:{
+        type:String,
+        required:true,
+        unique:true
+    },
     Status:{
         type:String,
         required:true
