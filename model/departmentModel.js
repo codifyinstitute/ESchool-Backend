@@ -5,6 +5,7 @@ const departmentModel = new mongoose.Schema({
         type: String,
         required: true
     },
+    Designation:[String],
     Description: {
         type: String,
         required: true

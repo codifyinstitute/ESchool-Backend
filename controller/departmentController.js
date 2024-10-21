@@ -25,10 +25,11 @@ exports.getDepartmentById = async (req, res) => {
 
 // Create a new department
 exports.createDepartment = async (req, res) => {
-    const { DepartmentName, Description } = req.body;
+    const { DepartmentName, Designation, Description } = req.body;
 
     const newDepartment = new Department({
         DepartmentName,
+        Designation,
         Description
     });
 
