@@ -26,15 +26,15 @@ exports.getHouseById = async (req, res) => {
 
 // Create a new house
 exports.createHouse = async (req, res) => {
-    const { HouseName, Description } = req.body;
+    const { HouseName, Color } = req.body;
 
     // Check if all fields are provided
-    if (!HouseName || !Description) {
-        return res.status(400).json({ message: "Please provide HouseName and Description" });
+    if (!HouseName || !Color) {
+        return res.status(400).json({ message: "Please provide HouseName and Color" });
     }
 
     try {
-        const newHouse = new House({ HouseName, Description });
+        const newHouse = new House({ HouseName, Color });
         await newHouse.save();
         res.status(201).json(newHouse);
     } catch (err) {
@@ -45,11 +45,11 @@ exports.createHouse = async (req, res) => {
 
 // Update a house by ID
 exports.updateHouse = async (req, res) => {
-    const { HouseName, Description } = req.body;
+    const { HouseName, Color } = req.body;
     try {
         const updatedHouse = await House.findByIdAndUpdate(
             req.params.id,
-            { HouseName, Description },
+            { HouseName, Color },
             { new: true }
         );
         
