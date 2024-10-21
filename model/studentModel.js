@@ -40,6 +40,9 @@ const studentModel = new mongoose.Schema({
         type: String,
         required: true
     },
+    House:{
+        type:String
+    },
     Email:{
         type:String
     },

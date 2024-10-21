@@ -46,51 +46,53 @@ exports.createDepartment = async (req, res) => {
     }
 };
 
-// Update a department
+
+// Update a department's designation (either add new or update existing)
 exports.updateDepartment = async (req, res) => {
     try {
-        const { DepartmentName, Designation, Description } = req.body;
-        const departmentId = req.params.id;
+        const { departmentId, Designation } = req.body; // departmentId is passed in the URL, Designation array is passed in the body
 
-        // Check if the department exists
+        // Find the department by its ID
         const department = await Department.findById(departmentId);
+
         if (!department) {
             return res.status(404).json({ message: "Department not found" });
         }
 
-        // Prepare the update data
-        const updatedData = {};
+        // Add new designations or update existing ones
+        if (Designation && Array.isArray(Designation) && Designation.length > 0) {
+            // Assuming Designation is an array of objects with { DesignationName, DesignationDescription }
+            Designation.forEach(newDesignation => {
+                // Check if the Designation already exists by name
+                const existingDesignationIndex = department.Designation.findIndex(
+                    item => item.DesignationName === newDesignation.DesignationName
+                );
 
-        if (DepartmentName) updatedData.DepartmentName = DepartmentName;
-        if (Description) updatedData.Description = Description;
-
-        // Ensure that Designation is an array of objects
-        if (Designation) {
-            if (!Array.isArray(Designation)) {
-                return res.status(400).json({ message: "Designation must be an array of objects" });
-            }
-            updatedData.Designation = Designation; // Designation should be an array of objects [{ DesignationName, Description }]
+                if (existingDesignationIndex !== -1) {
+                    // Update the existing designation if found
+                    department.Designation[existingDesignationIndex].DesignationDescription = newDesignation.DesignationDescription;
+                } else {
+                    // Add new designation if not found
+                    department.Designation.push({
+                        DesignationName: newDesignation.DesignationName,
+                        DesignationDescription: newDesignation.DesignationDescription
+                    });
+                }
+            });
         }
 
-        // Update the department
-        const updatedDepartment = await Department.findByIdAndUpdate(
-            departmentId,
-            updatedData,
-            { new: true, runValidators: true } // `runValidators` ensures the data respects the schema constraints
-        );
+        // Save the updated department
+        const updatedDepartment = await department.save();
 
-        if (!updatedDepartment) {
-            return res.status(404).json({ message: "Department not found" });
-        }
-
-        // Send back the updated department details
+        // Return the updated department as a response
         res.status(200).json(updatedDepartment);
 
     } catch (error) {
         console.error("Error updating department:", error);
-        res.status(400).json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
 };
+
 
 // Delete a department
 exports.deleteDepartment = async (req, res) => {
