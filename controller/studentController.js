@@ -44,7 +44,7 @@ const addStudent = async (req, res) => {
             AdmissionDate: req.body.AdmissionDate,
             Stream: req.body.Stream,
             AdmissionInClass: req.body.AdmissionInClass,
-            House: req.body.House,
+            Section: req.body.Section,
             FeeCategory: req.body.FeeCategory,
             RollNo: req.body.RollNo,
             LastSchoolAttended: req.body.LastSchoolAttended,

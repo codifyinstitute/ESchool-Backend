@@ -65,7 +65,7 @@ const studentModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    House:{
+    Section:{
         type: String
     },
     FeeCategory: {
