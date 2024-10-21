@@ -24,7 +24,7 @@ exports.getAcademicYearById = async (req, res) => {
 // Create a new academic year
 exports.createAcademicYear = async (req, res) => {
     const { StartYear, StartMonth, EndYear, EndMonth, Status } = req.body;
-    const newAcademicYear = new AcademicYearInfo({ StartYear, StartMonth, EndYear, EndMonth, Status });
+    const newAcademicYear = new AcademicYearInfo({ StartYear, StartMonth, EndYear, EndMonth, AcademicYear: `${StartYear}-${EndYear}`, Status: "DeActive" });
 
     try {
         const savedAcademicYear = await newAcademicYear.save();
@@ -53,5 +53,31 @@ exports.deleteAcademicYear = async (req, res) => {
         res.status(200).json({ message: 'Academic Year deleted successfully' });
     } catch (error) {
         res.status(500).json({ message: error.message });
+    }
+};
+
+// Change status to active
+exports.setActiveStatus = async (req, res) => {
+    try {
+
+        const acedemic = await AcademicYearInfo.findById(req.params.id);
+
+        if (!acedemic) {
+            return res.status(404).json({ message: "Academic Year not found" });
+        }
+
+        // Set all academic years to inactive
+        await AcademicYearInfo.updateMany({}, { Status: "DeActive" });
+
+        // Set the specified academic year to active
+        const updatedAcademicYear = await AcademicYearInfo.findByIdAndUpdate(
+            req.params.id,
+            { Status: "Active" },
+            { new: true }
+        );
+
+        res.status(200).json({ message: "Academic Year status set to active", updatedAcademicYear });
+    } catch (error) {
+        res.status(500).json({ message: "Error changing status", error: error.message });
     }
 };
