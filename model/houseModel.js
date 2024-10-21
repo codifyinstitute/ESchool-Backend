@@ -5,7 +5,7 @@ const houseModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    Description: {
+    Color: {
         type: String,
         required: true
     }
