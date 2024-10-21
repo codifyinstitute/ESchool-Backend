@@ -40,6 +40,7 @@ const schoolsetupRoutes = require('./routes/schoolSetupRoutes');
 const academicYearInfoRoutes = require('./routes/academicYearInfoRoutes');
 const academicYearPlanRoutes = require('./routes/academicYearPlanRoutes');
 const datesheetRoutes = require('./routes/datesheetRoutes');
+const houseRoutes = require('./routes/houseRoutes')
 
 app.use(cors());
 
@@ -88,6 +89,7 @@ app.use('/academic-year-info', academicYearInfoRoutes);
 app.use('/academic-year-plan', academicYearPlanRoutes);
 app.use('/schoolsetup', schoolsetupRoutes);
 app.use('/datesheet', datesheetRoutes);
+app.use('/house', houseRoutes);
 
 
 app.get('/', (req, res) => res.send('<h1 style="display:flex;height: 100%;align-items: center;justify-content: center;margin:0;">Server Is Running!!!!</h1>'));
