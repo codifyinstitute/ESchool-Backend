@@ -14,6 +14,9 @@ const feeSlabModel = new mongoose.Schema({
         Name:{
             type:String
         },
+        Times:{
+            type:Number
+        },
         Amount:{
             type:Number
         }
