@@ -4,6 +4,7 @@ const academicYearInfoController = require('../controller/academicYearInfoContro
 
 // Routes
 router.get('/all', academicYearInfoController.getAllAcademicYears);
+router.get('/active', academicYearInfoController.getActiveData);
 router.get('/get/:id', academicYearInfoController.getAcademicYearById);
 router.post('/add', academicYearInfoController.createAcademicYear);
 router.put('/update/:id', academicYearInfoController.updateAcademicYear);

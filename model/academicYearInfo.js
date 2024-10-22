@@ -1,30 +1,36 @@
 const mongoose = require("mongoose");
 
 const academicYearInfoModel = new mongoose.Schema({
-    StartYear:{
-        type:Number,
-        required:true
+    StartYear: {
+        type: Number,
+        required: true
     },
-    StartMonth:{
-        type:String,
-        required:true
+    StartMonth: {
+        type: String,
+        required: true
     },
-    EndYear:{
-        type:Number,
-        required:true
+    StartMonthNumber: {
+        type: Number
     },
-    EndMonth:{
-        type:String,
-        required:true
+    EndYear: {
+        type: Number,
+        required: true
     },
-    AcademicYear:{
-        type:String,
-        required:true,
-        unique:true
+    EndMonth: {
+        type: String,
+        required: true
     },
-    Status:{
-        type:String,
-        required:true
+    EndMonthNumber: {
+        type: Number
+    },
+    AcademicYear: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    Status: {
+        type: String,
+        required: true
     }
 });
 

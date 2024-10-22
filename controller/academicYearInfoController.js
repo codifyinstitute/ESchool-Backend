@@ -23,8 +23,11 @@ exports.getAcademicYearById = async (req, res) => {
 
 // Create a new academic year
 exports.createAcademicYear = async (req, res) => {
+    function getMonthNumberFromName(monthName) {
+        return new Date(`${monthName} 1, 2022`).getMonth() + 1;
+    }
     const { StartYear, StartMonth, EndYear, EndMonth, Status } = req.body;
-    const newAcademicYear = new AcademicYearInfo({ StartYear, StartMonth, EndYear, EndMonth, AcademicYear: `${StartYear}-${EndYear}`, Status: "DeActive" });
+    const newAcademicYear = new AcademicYearInfo({ StartYear, StartMonth, EndYear, EndMonth, StartMonthNumber: getMonthNumberFromName(StartMonth), EndMonthNumber: getMonthNumberFromName(EndMonth), AcademicYear: `${StartYear}-${EndYear}`, Status: "DeActive" });
 
     try {
         const savedAcademicYear = await newAcademicYear.save();
@@ -81,3 +84,14 @@ exports.setActiveStatus = async (req, res) => {
         res.status(500).json({ message: "Error changing status", error: error.message });
     }
 };
+
+exports.getActiveData = async (req, res) => {
+    try {
+        const academicYear = await AcademicYearInfo.findOne({ Status: "Active" });
+        if (!academicYear) return res.status(404).json({ message: 'No Active Academic Year found' });
+
+        res.status(200).json(academicYear);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
