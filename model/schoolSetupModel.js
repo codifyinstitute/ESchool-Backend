@@ -2,64 +2,49 @@ const mongoose = require("mongoose");
 
 const schoolSetupModel = new mongoose.Schema({
     SchoolName: {
-        type: String,
-        required: true
+        type: String
     },
     Address: {
-        type: String,
-        required: true
+        type: String
     },
     PhoneNo: {
-        type: String,
-        required: true
+        type: String
     },
     Website: {
-        type: String,
-        required: true
+        type: String
     },
     SchoolLogo: {
-        type: String,
-        required: true
+        type: String
     },
     EmailId: {
-        type: String,
-        required: true
+        type: String
     },
     StartTime:{
-        type: String,
-        required: true
+        type: String
     },
     EndTime:{
-        type: String,
-        required: true
+        type: String
     },
     SchoolStamp:{
-        type: String,
-        required: true
+        type: String
     },
     SalaryDate:{
-        type: String,
-        required: true
+        type: String
     },
     WeeklyOff:{
-        type: String,
-        required: true
+        type: String
     },
     PrincipleSign:{
-        type: String,
-        required: true
+        type: String
     },
     SchoolSign:{
-        type: String,
-        required: true
+        type: String
     },
     AffiliationNo:{
-        type: String,
-        required: true
+        type: String
     },
     UDISECode:{
-        type: String,
-        required: true
+        type: String
     }
 });
 
