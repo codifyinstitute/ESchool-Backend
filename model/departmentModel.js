@@ -11,7 +11,7 @@ const departmentModel = new mongoose.Schema({
                 type: String,
                 required: true
             },
-            Description: {
+            DesignationDescription: {
                 type: String,
                 required: true
             }

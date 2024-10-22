@@ -37,6 +37,7 @@ const addStudent = async (req, res) => {
             AadharNumber: req.body.AadharNumber,
             MobileNo: req.body.MobileNo,
             Email: req.body.Email,
+            House: req.body.House,
             Address: req.body.Address,
             City: req.body.City,
             Area: req.body.Area,
