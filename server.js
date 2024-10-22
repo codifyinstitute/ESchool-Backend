@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const app = express();
 const studentRoutes = require('./routes/studentRoute');
 const staffRoutes = require('./routes/staffRoute');
@@ -93,6 +94,7 @@ app.use('/datesheet', datesheetRoutes);
 app.use('/house', houseRoutes);
 app.use('/route', routeRoutes);
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.get('/', (req, res) => res.send('<h1 style="display:flex;height: 100%;align-items: center;justify-content: center;margin:0;">Server Is Running!!!!</h1>'));
 
