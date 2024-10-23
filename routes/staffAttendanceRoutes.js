@@ -6,7 +6,7 @@ const {
     getAttendanceById,
     updateAttendance,
     deleteAttendance
-} = require("../controller/studentAttendanceController"); // Adjust the path as necessary
+} = require("../controller/staffAttendanceController"); // Adjust the path as necessary
 
 // Route to add new attendance record
 router.post("/add", addAttendance);
