@@ -5,10 +5,10 @@ const studentModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    StudentId:{
+    StudentId: {
         type: String,
         required: true,
-        unique:true
+        unique: true
     },
     DOB: {
         type: String,
@@ -40,11 +40,11 @@ const studentModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    House:{
-        type:String
+    House: {
+        type: String
     },
-    Email:{
-        type:String
+    Email: {
+        type: String
     },
     Address: {
         type: String
@@ -68,7 +68,7 @@ const studentModel = new mongoose.Schema({
         type: String,
         required: true
     },
-    Section:{
+    Section: {
         type: String
     },
     FeeCategory: {
@@ -116,6 +116,17 @@ const studentModel = new mongoose.Schema({
     },
     Orphan: {
         type: Boolean
+    },
+    SiblingStatus: {
+        type: Boolean
+    },
+    Sibling: {
+        Id: {
+            type: String
+        },
+        Status: {
+            type: Boolean
+        },
     },
     Subject: [String],
     FatherDetail: {
@@ -168,7 +179,7 @@ const studentModel = new mongoose.Schema({
             type: String
         }
     },
-    EmergencyContact:{
+    EmergencyContact: {
         Name: {
             type: String
         },
@@ -179,11 +190,11 @@ const studentModel = new mongoose.Schema({
             type: String
         },
     },
-    Document:{
+    Document: {
         StudentPhoto: {
             type: String,
         },
-        Birth:{
+        Birth: {
             type: String,
         },
         Leaving: {
@@ -195,7 +206,7 @@ const studentModel = new mongoose.Schema({
         MotherPhoto: {
             type: String
         }
-    }   
+    }
 });
 
 const Student = mongoose.model('Student', studentModel);
