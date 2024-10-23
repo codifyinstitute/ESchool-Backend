@@ -3,7 +3,8 @@ const path = require('path');
 const moment = require('moment-timezone');
 const Student = require('../model/studentModel');
 const Counter = require('../model/counterModel');
-const Login = require('../model/loginModel'); 
+const Login = require('../model/loginModel');
+const SiblingModel = require('../model/SiblingModel');
 
 // Add a new student
 
@@ -12,6 +13,7 @@ const addStudent = async (req, res) => {
     const month = moment().format('MM');
     const year = moment().format('YYYY');
     let id;
+    let sibDataToSave;
 
     try {
         let counter = await Counter.findOne({ Title: `STU-${year}-${month}` });
@@ -23,6 +25,58 @@ const addStudent = async (req, res) => {
         }
 
         id = `STU${year}${month}${counter.Count.toString().padStart(4, '0')}`;
+
+        if (req.body.SiblingStatus) {
+            const sibData = await SiblingModel.findOne({ ExistingStudentId: req.body.SibId }); // Use req.body.SibId
+
+            if (sibData) {
+                // If sibling data exists, push the new student to the existing sibling array
+                sibData.Sibling.push({
+                    StudentId: id,
+                    StudentName: req.body.StudentName
+                });
+
+                sibDataToSave = {
+                    Id: sibData.SiblingId,
+                    Status: true
+                };
+
+                await sibData.save(); // Save the updated sibling data
+            } else {
+                let counter = await Counter.findOne({ Title: `SIB-${year}-${month}` });
+
+                if (!counter) {
+                    counter = new Counter({ Title: `SIB-${year}-${month}`, Count: 1 });
+                } else {
+                    counter.Count += 1;
+                }
+                let siblingId = `SIB${year}${month}${counter.Count.toString().padStart(4, '0')}`;
+
+                var exeStuData = await Student.findOne({ StudentId: req.body.SibId });
+                exeStuData.SiblingStatus = true;
+                exeStuData.Sibling.Id = siblingId;
+                exeStuData.Sibling.Status = false;
+
+                const sibling = new SiblingModel({
+                    SiblingId: siblingId,
+                    StudentId: req.body.SibId, // Adjust as necessary
+                    StudentName: req.body.SibName, // Adjust as necessary
+                    Sibling: [{
+                        StudentId: id,
+                        StudentName: req.body.StudentName
+                    }]
+                });
+
+                sibDataToSave = {
+                    Id: siblingId,
+                    Status: true
+                };
+
+                await exeStuData.save();
+                await sibling.save();
+                await counter.save();
+            }
+        }
 
         const newStudent = new Student({
             StudentName: req.body.StudentName,
@@ -61,6 +115,8 @@ const addStudent = async (req, res) => {
             DisabilityName: req.body.DisabilityName,
             Discount: req.body.Discount,
             Orphan: req.body.Orphan,
+            SiblingStatus: req.body.SiblingStatus,
+            Sibling: sibDataToSave,
             Subject: req.body.Subject,
             FatherDetail: JSON.parse(req.body.FatherDetail),
             MotherDetails: JSON.parse(req.body.MotherDetails),
@@ -74,8 +130,8 @@ const addStudent = async (req, res) => {
             },
         });
 
-        console.log({ Id: id, Password: req.body.MobileNo, Role: "Student" })
-        console.log(req.body)
+        console.log({ Id: id, Password: req.body.MobileNo, Role: "Student" });
+        console.log(req.body);
 
         const newUser = new Login({ Id: id, Password: req.body.MobileNo, Role: "Student" });
         await newUser.save();
@@ -84,9 +140,10 @@ const addStudent = async (req, res) => {
         res.status(201).json(newStudent);
     } catch (error) {
         res.status(400).json({ message: error.message });
-        console.log(error)
+        console.log(error);
     }
 };
+
 
 // Get all students
 const getAllStudents = async (req, res) => {
