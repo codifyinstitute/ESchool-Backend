@@ -44,6 +44,8 @@ const datesheetRoutes = require('./routes/datesheetRoutes');
 const houseRoutes = require('./routes/houseRoutes');
 const routeRoutes = require('./routes/routeRoutes');
 const siblingRoutes = require("./routes/siblingRoutes");
+const complaintForRoutes = require('./routes/complaintForRoutes');
+const purposeRoutes = require('./routes/purposeRoutes');
 const staffAttendanceRoute = require("./routes/staffAttendanceRoutes");
 
 app.use(cors());
@@ -96,6 +98,8 @@ app.use('/datesheet', datesheetRoutes);
 app.use('/house', houseRoutes);
 app.use('/route', routeRoutes);
 app.use("/sibling", siblingRoutes);
+app.use('/complaintfor', complaintForRoutes);
+app.use('/purpose', purposeRoutes);
 app.use('/staff-attendance', staffAttendanceRoute);
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
