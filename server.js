@@ -45,6 +45,7 @@ const houseRoutes = require('./routes/houseRoutes');
 const routeRoutes = require('./routes/routeRoutes');
 const siblingRoutes = require("./routes/siblingRoutes");
 const complaintForRoutes = require('./routes/complaintForRoutes');
+const purposeRoutes = require('./routes/purposeRoutes');
 
 app.use(cors());
 
@@ -97,6 +98,7 @@ app.use('/house', houseRoutes);
 app.use('/route', routeRoutes);
 app.use("/sibling", siblingRoutes);
 app.use('/complaintfor', complaintForRoutes);
+app.use('/purpose', purposeRoutes);
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
