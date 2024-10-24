@@ -15,14 +15,14 @@ const feeDataModel = new mongoose.Schema({
             type: String
         },
         Months:[String],
-        Fee: {
+        Fee: [{
             Name: {
                 type: String
             },
             Amount: {
                 type: Number
             }
-        },
+        }],
         Mode:{
             type:String
         },
@@ -32,6 +32,9 @@ const feeDataModel = new mongoose.Schema({
     }],
     RemainingFee: {
         type: Number
+    },
+    Balance:{
+        type:Number
     },
     TotalFee: {
         type: Number
