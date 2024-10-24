@@ -47,6 +47,8 @@ const siblingRoutes = require("./routes/siblingRoutes");
 const complaintForRoutes = require('./routes/complaintForRoutes');
 const purposeRoutes = require('./routes/purposeRoutes');
 const staffAttendanceRoute = require("./routes/staffAttendanceRoutes");
+const approvedByRoute = require('./routes/approvedByRoutes');
+const homeworkTypeRoute = require('./routes/homeworkTypeRoutes');
 
 app.use(cors());
 
@@ -101,6 +103,9 @@ app.use("/sibling", siblingRoutes);
 app.use('/complaintfor', complaintForRoutes);
 app.use('/purpose', purposeRoutes);
 app.use('/staff-attendance', staffAttendanceRoute);
+app.use('/approvedby', approvedByRoute);
+app.use('/homeworktype', homeworkTypeRoute);
+
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
