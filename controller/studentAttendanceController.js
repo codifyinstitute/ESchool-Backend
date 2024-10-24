@@ -5,6 +5,13 @@ exports.createAttendance = async (req, res) => {
     const { Date, Class, Section, Attendance } = req.body; // Destructure fields
 
     try {
+        // Check if an attendance record already exists for the given Date, Class, and Section
+        const existingRecord = await StudentAttendance.findOne({ Date, Class, Section });
+
+        if (existingRecord) {
+            return res.status(400).json({ message: 'Attendance record for this Date, Class, and Section already exists.' });
+        }
+
         const studentAttendance = new StudentAttendance({ Date, Class, Section, Attendance });
         await studentAttendance.save();
         res.status(201).json(studentAttendance);
@@ -12,6 +19,7 @@ exports.createAttendance = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
 
 // Get all attendance records
 exports.getAllAttendance = async (req, res) => {
